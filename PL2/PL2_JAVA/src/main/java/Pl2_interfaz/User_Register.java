@@ -4,6 +4,9 @@
  */
 package Pl2_interfaz;
 
+import java.util.HashMap;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author daniel
@@ -182,10 +185,20 @@ public class User_Register extends javax.swing.JFrame {
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         // TODO add your handling code here:
+        if (jCheckBox1.isSelected()) {
+            jPasswordField1.setEchoChar((char) 0); // Muestra la contraseña
+        } else {
+            jPasswordField1.setEchoChar('*'); // Vuelve a ocultarla con un punto negro (•)
+        }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
         // TODO add your handling code here:
+        if (jCheckBox2.isSelected()) {
+            jPasswordField2.setEchoChar((char) 0); // Muestra la contraseña
+        } else {
+            jPasswordField2.setEchoChar('*'); // Vuelve a ocultarla con un punto negro (•)
+        }
     }//GEN-LAST:event_jCheckBox2ActionPerformed
 
     private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox3ActionPerformed
@@ -194,6 +207,27 @@ public class User_Register extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        Login_User user = new Login_User();
+        HashMap<String, String> users = new HashMap<>();
+        String name = jFormattedTextField1.getText();
+        String eMail = jFormattedTextField2.getText();
+        String direction  = jFormattedTextField3.getText();
+        String phoneNumber = jFormattedTextField4.getText();
+        String key = new String(jPasswordField1.getPassword());
+        String creditCard = new String(jPasswordField2.getPassword());
+        Boolean si = (!name.isEmpty() && !eMail.isEmpty() && !direction.isEmpty() && !phoneNumber.isEmpty() && !key.isEmpty() && !creditCard.isEmpty());
+        if((si) && !users.containsKey(eMail)){
+            JOptionPane.showMessageDialog(this, "Has sido registrado correctamente", "Registro Exitoso", JOptionPane.INFORMATION_MESSAGE);
+            users.put(eMail, key);
+            user.setVisible(true);
+            this.dispose();
+
+            
+        }else if(!si){
+            JOptionPane.showMessageDialog(this, "No has sido registrado correctamente. Rellene todas las casillas por favor", "Registro No Exitoso", JOptionPane.ERROR_MESSAGE);
+        }else if(users.containsKey(eMail)){
+            JOptionPane.showMessageDialog(this, String.format("No has sido registrado correctamente. Ya hay una cuenta con este correo: %d ", eMail), "Registro No Exitoso", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
