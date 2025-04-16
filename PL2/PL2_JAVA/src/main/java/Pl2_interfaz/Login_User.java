@@ -42,7 +42,7 @@ public class Login_User extends javax.swing.JFrame {
         jCheckBox1 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Iniciar sesión:");
+        setTitle("JavaEvents");
 
         jLabel1.setText("Acceso como usuario");
 

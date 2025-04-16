@@ -45,6 +45,7 @@ public class User_Register extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("JavaEvents");
 
         jLabel1.setText("Register");
 
