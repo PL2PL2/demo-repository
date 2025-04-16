@@ -14,9 +14,9 @@ public class Administrador {
     private String correo;
     private String clave;
     private ArrayList<Evento> eventos; // Todos los eventos.
-    private ArrayList<Clientes> clientes; // Todos los clientes.
+    private ArrayList<Cliente> clientes; // Todos los clientes.
 
-    public Administrador(String correo, String clave, ArrayList<Evento> eventos, ArrayList<Clientes> clientes) {
+    public Administrador(String correo, String clave, ArrayList<Evento> eventos, ArrayList<Cliente> clientes) {
         this.correo = correo;
         this.clave = clave;
         this.eventos = eventos;
@@ -47,11 +47,11 @@ public class Administrador {
         this.eventos = eventos;
     }
 
-    public ArrayList<Clientes> getClientes() {
+    public ArrayList<Cliente> getClientes() {
         return clientes;
     }
 
-    public void setClientes(ArrayList<Clientes> clientes) {
+    public void setClientes(ArrayList<Cliente> clientes) {
         this.clientes = clientes;
     }
 
