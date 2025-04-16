@@ -4,6 +4,8 @@
  */
 package pl2_java;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Alejandro
@@ -15,16 +17,16 @@ private String direccion; //(calle, número, ciudad y código postal).
 private String fechas;// y horas de celebración. Puede ser que un evento solo se celebre una sola vez o se repita en el tiempo.
 private Double precio; //de la entrada.
 private String portada; //(imagen del evento).
-private Double calificacion; //(media de las reseñas sobre 5)
+private ArrayList<Double> calificaciones; //(media de las reseñas sobre 5)
 
-    public Evento(String titulo, String tipo, String direccion, String fechas, Double precio, String portada, Double calificacion) {
+    public Evento(String titulo, String tipo, String direccion, String fechas, Double precio, String portada) {
         this.titulo = titulo;
         this.tipo = tipo;
         this.direccion = direccion;
         this.fechas = fechas;
         this.precio = precio;
         this.portada = portada;
-        this.calificacion = calificacion;
+        this.calificaciones = new ArrayList<>();
     }
 
     public String getTitulo() {
@@ -75,17 +77,26 @@ private Double calificacion; //(media de las reseñas sobre 5)
         this.portada = portada;
     }
 
-    public Double getCalificacion() {
-        return calificacion;
+    public void agregarReseña(double c) {
+        if (c >= 0 && c <= 5) {
+            calificaciones.add(c);
+        }
     }
 
-    public void setCalificacion(Double calificacion) {
-        this.calificacion = calificacion;
+    public double getCalificacionMedia() {
+        if (calificaciones.isEmpty()){
+            return 0.0;
+        }
+        double suma = 0;
+        for (double r : calificaciones) {
+            suma += r;
+        }
+        return (Math.round((suma / calificaciones.size()) * 100.0) / 100.0); // redondeado a 2 decimales
     }
 
     @Override
     public String toString() {
-        return "Evento{" + "titulo=" + titulo + ", tipo=" + tipo + ", direccion=" + direccion + ", fechas=" + fechas + ", precio=" + precio + ", portada=" + portada + ", calificacion=" + calificacion + '}';
+        return "Evento{" + "titulo=" + titulo + ", tipo=" + tipo + ", direccion=" + direccion + ", fechas=" + fechas + ", precio=" + precio + ", portada=" + portada + ", calificacion=" + this.getCalificacionMedia() + '}';
     }
 
 }
