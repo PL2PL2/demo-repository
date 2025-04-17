@@ -147,6 +147,7 @@ public class Login_User extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         Login_User si = new Login_User();
+        Inicio_Usuario inicio = new Inicio_Usuario();
         HashMap<String, String> users = new HashMap<>();
         users.put("pepe@gmail.com", "1234");
         users.put("paco@yahoo.es", "4567");
@@ -155,7 +156,10 @@ public class Login_User extends javax.swing.JFrame {
         
         if(user.matches(".+@.+\\..+")){
             if(users.containsKey(user) && users.get(user).equals(password)){
-                JOptionPane.showMessageDialog(this, "Usuario y/o contraseña válidos", "", JOptionPane.INFORMATION_MESSAGE);
+                //JOptionPane.showMessageDialog(this, "Usuario y/o contraseña válidos", "", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+                inicio.setVisible(true);
+                
             }else{
                 JOptionPane.showMessageDialog(this, "Usuario y/o contraseñas incorrectos", password, JOptionPane.ERROR_MESSAGE);
 

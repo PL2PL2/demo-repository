@@ -78,13 +78,13 @@ public class Administrador {
         return false;
     }
     
-    public boolean modificarEventoPorTitulo(String titulo, String nuevoTitulo, String nuevoTipo, String nuevaDireccion,List<String> nuevasFechas, double nuevoPrecio, String nuevaPortada) {
+    public boolean modificarEventoPorTitulo(String titulo, String nuevoTitulo, String nuevoTipo, String nuevaDireccion,String[] nuevasFechas, double nuevoPrecio, String nuevaPortada) {
     for (Evento e : eventos) {
         if (e.getTitulo().equals(titulo)) {
             e.setTitulo(nuevoTitulo);
             e.setTipo(nuevoTipo);
             e.setDireccion(nuevaDireccion);
-            e.setFechas(nuevasFechas);
+            //e.setFechas(nuevasFechas);
             e.setPrecio(nuevoPrecio);
             e.setPortada(nuevaPortada);
             return true; 

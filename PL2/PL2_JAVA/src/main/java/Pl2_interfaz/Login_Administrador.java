@@ -132,11 +132,14 @@ public class Login_Administrador extends javax.swing.JFrame {
         // TODO add your handling code here:
         //HashMap<String, String> admins = new HashMap<>();
         //admins.put("admin@javaevents.com", "admin");
+        Inicio_Admin inicio = new Inicio_Admin();
         String admin = jFormattedTextField1.getText();
         String password = new String(jPasswordField1.getPassword());
         
         if(admin.equals("admin@javaevents.com") && password.equals("admin")){
             JOptionPane.showMessageDialog(this, "Credenciales válidas", password, JOptionPane.INFORMATION_MESSAGE);
+            inicio.setVisible(true);
+            this.dispose();
         }else{
             JOptionPane.showMessageDialog(this, "Tú no eres el puto Admin", password, JOptionPane.ERROR_MESSAGE);
         } 

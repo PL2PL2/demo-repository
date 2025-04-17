@@ -217,7 +217,7 @@ public class User_Register extends javax.swing.JFrame {
         String creditCard = new String(jPasswordField2.getPassword());
         Boolean si = (!name.isEmpty() && !eMail.isEmpty() && !direction.isEmpty() && !phoneNumber.isEmpty() && !key.isEmpty() && !creditCard.isEmpty());
         if((si) && !users.containsKey(eMail)){
-            JOptionPane.showMessageDialog(this, "Has sido registrado correctamente", "Registro Exitoso", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Has sido registrado correctamente. Inicie sesión para continuar", "Registro Exitoso", JOptionPane.INFORMATION_MESSAGE);
             users.put(eMail, key);
             user.setVisible(true);
             this.dispose();
