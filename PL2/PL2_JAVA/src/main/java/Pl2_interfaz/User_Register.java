@@ -230,29 +230,45 @@ public class User_Register extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Has sido registrado correctamente. Inicie sesión para continuar", "Registro Exitoso", JOptionPane.INFORMATION_MESSAGE);
             users.put(eMail, key);
             user.setVisible(true);
-        try{ //Esto es para guardar el objeto completo de cliente
-            Cliente c = new Cliente(name,eMail,key,phoneNumber,direction,creditCard,VIP);
-            FileOutputStream fosCliente = new FileOutputStream("registroClientes.dat");
-            ObjectOutputStream oosCliente = new ObjectOutputStream(fosCliente);
-            oosCliente.writeObject(c);
-            FileInputStream fisCliente = new FileInputStream("registroClientes.dat");
-            ObjectInputStream oisCliente = new ObjectInputStream(fisCliente);
-            try {
-                while (true) {
-                        Cliente per = (Cliente) oisCliente.readObject();
-                        System.out.println (per.toString());
-                    }
-                } catch (EOFException e) {
-                    System.out.println ("Lectura de los objetos de tipo Cliente finalizada");
-            }
-                fisCliente.close();
+            
+        try { //Esto es para guardar todos los datos de Cliente
+    Cliente c = new Cliente(name, eMail, key, phoneNumber, direction, creditCard, VIP);
+
+    File archivo = new File("registroClientes.dat");
+    FileOutputStream fosCliente = new FileOutputStream(archivo, true); // modo append
+
+    ObjectOutputStream oosCliente;
+    if (archivo.length() == 0) {
+        oosCliente = new ObjectOutputStream(fosCliente); // escribe header si archivo vacío
+    } else {
+        oosCliente = new MiObjectOutputStream(fosCliente); // evita escribir header
+    }
+
+    oosCliente.writeObject(c);
+    oosCliente.close();
+
+    // Lectura del archivo
+    FileInputStream fisCliente = new FileInputStream("registroClientes.dat");
+    ObjectInputStream oisCliente = new ObjectInputStream(fisCliente);
+
+    try {
+        while (true) {
+            Cliente per = (Cliente) oisCliente.readObject();
+            System.out.println(per.toString());
         }
-        catch (IOException ioe){
-            System.out.println("Error IO: "+ioe.toString());
-        }
-        catch(Exception e){
-            System.out.println("Error: "+e.toString());
-        }
+    } catch (EOFException e) {
+        System.out.println("Lectura de los objetos de tipo Cliente finalizada");
+    }
+
+    fisCliente.close();
+}
+catch (IOException ioe) {
+    System.out.println("Error IO: " + ioe.toString());
+}
+catch (Exception e) {
+    System.out.println("Error: " + e.toString());
+}
+
             
             
             
