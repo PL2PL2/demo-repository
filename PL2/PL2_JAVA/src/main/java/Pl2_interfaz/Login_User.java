@@ -6,14 +6,30 @@ package Pl2_interfaz;
 
 import java.util.HashMap;
 import javax.swing.JOptionPane;
+import java.io.*;
+import pl2_java.*;
 
+/*
+            
+            if(users.containsKey(user) && users.get(user).equals(password)){
+                //JOptionPane.showMessageDialog(this, "Usuario y/o contraseña válidos", "", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+                inicio.setVisible(true);
+                
+            }else{
+                JOptionPane.showMessageDialog(this, "Usuario y/o contraseñas incorrectos", password, JOptionPane.ERROR_MESSAGE);
+
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Formato de correo no válido", "", JOptionPane.ERROR_MESSAGE);
+*/
 
 /**
  *
  * @author Alejandro
  */
 public class Login_User extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form Registro_Login
      */
@@ -155,19 +171,33 @@ public class Login_User extends javax.swing.JFrame {
         users.put("paco@yahoo.es", "4567");
         String user = jFormattedTextField1.getText();
         String password = new String(jPasswordField1.getPassword());
+        boolean existe = false;
         
         if(user.matches(".+@.+\\..+")){
-            if(users.containsKey(user) && users.get(user).equals(password)){
-                //JOptionPane.showMessageDialog(this, "Usuario y/o contraseña válidos", "", JOptionPane.INFORMATION_MESSAGE);
-                this.dispose();
-                inicio.setVisible(true);
-                
-            }else{
-                JOptionPane.showMessageDialog(this, "Usuario y/o contraseñas incorrectos", password, JOptionPane.ERROR_MESSAGE);
-
+            File archivo = new File("registroClientes.dat");
+            
+            if(archivo.exists() && archivo.length() > 0){
+                try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo))) {
+                    while (true) {
+                        Cliente existente = (Cliente) ois.readObject();
+                        if (existente.getCorreo_electronico().equals(user)) {
+                            existe = true;
+                            break;
+                        }
+                    }
+                } catch (EOFException eof) {
+                    // fin del archivo
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-        }else{
-            JOptionPane.showMessageDialog(this, "Formato de correo no válido", "", JOptionPane.ERROR_MESSAGE);
+            if(existe){
+                cargando msg = new cargando("Cargando...", "Esperando al servidor", 1000);
+                inicio.setVisible(true);
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(this, "No se ha encontrado su correo", "Usuario no encontrado", JOptionPane.ERROR_MESSAGE);
+            }
         }
        
     }//GEN-LAST:event_jButton1ActionPerformed

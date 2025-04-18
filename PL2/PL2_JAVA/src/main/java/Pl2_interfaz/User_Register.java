@@ -224,60 +224,59 @@ public class User_Register extends javax.swing.JFrame {
         String key = new String(jPasswordField1.getPassword());
         String creditCard = new String(jPasswordField2.getPassword());
         boolean VIP = jCheckBox3.isSelected();
-        
-        Boolean si = (!name.isEmpty() && !eMail.isEmpty() && !direction.isEmpty() && !phoneNumber.isEmpty() && !key.isEmpty() && !creditCard.isEmpty());
-        if((si) && !users.containsKey(eMail)){
-            JOptionPane.showMessageDialog(this, "Has sido registrado correctamente. Inicie sesión para continuar", "Registro Exitoso", JOptionPane.INFORMATION_MESSAGE);
-            users.put(eMail, key);
-            user.setVisible(true);
-            
-        try { //Esto es para guardar todos los datos de Cliente
-    Cliente c = new Cliente(name, eMail, key, phoneNumber, direction, creditCard, VIP);
+        boolean camposCompletos = (!name.isEmpty() && !eMail.isEmpty() && !direction.isEmpty() &&
+                               !phoneNumber.isEmpty() && !key.isEmpty() && !creditCard.isEmpty());
+        boolean existe = false;
+    
+        Cliente nuevoCliente = new Cliente(name, eMail, key, phoneNumber, direction, creditCard, VIP);
 
-    File archivo = new File("registroClientes.dat");
-    FileOutputStream fosCliente = new FileOutputStream(archivo, true); // modo append
+        if (camposCompletos) {
+            File archivo = new File("registroClientes.dat");
 
-    ObjectOutputStream oosCliente;
-    if (archivo.length() == 0) {
-        oosCliente = new ObjectOutputStream(fosCliente); // escribe header si archivo vacío
-    } else {
-        oosCliente = new MiObjectOutputStream(fosCliente); // evita escribir header
-    }
+            // Primero comprobamos si el cliente ya existe
+            if (archivo.exists() && archivo.length() > 0) {
+                try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo))) {
+                    while (true) {
+                        Cliente existente = (Cliente) ois.readObject();
+                        if (existente.getCorreo_electronico().equals(eMail)) {
+                            existe = true;
+                            break;
+                        }
+                    }
+                } catch (EOFException eof) {
+                    // fin del archivo
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
 
-    oosCliente.writeObject(c);
-    oosCliente.close();
+            if (!existe) {
+                try {
+                    FileOutputStream fos = new FileOutputStream(archivo, true);
+                    ObjectOutputStream oos;
+                    if (archivo.length() == 0) {
+                        oos = new ObjectOutputStream(fos); // Escribe encabezado
+                    } else {
+                        oos = new MiObjectOutputStream(fos); // clase que no escribe encabezado
+                    }
 
-    // Lectura del archivo
-    FileInputStream fisCliente = new FileInputStream("registroClientes.dat");
-    ObjectInputStream oisCliente = new ObjectInputStream(fisCliente);
+                    oos.writeObject(nuevoCliente);
+                    oos.close();
 
-    try {
-        while (true) {
-            Cliente per = (Cliente) oisCliente.readObject();
-            System.out.println(per.toString());
-        }
-    } catch (EOFException e) {
-        System.out.println("Lectura de los objetos de tipo Cliente finalizada");
-    }
+                    JOptionPane.showMessageDialog(this, "Has sido registrado correctamente. Inicie sesión para continuar", "Registro Exitoso", JOptionPane.INFORMATION_MESSAGE);
+                    // users.put(eMail, key);
+                    user.setVisible(true);
+                    this.dispose();
+                } catch (IOException ioe) {
+                    ioe.printStackTrace();
+                    JOptionPane.showMessageDialog(this, "Error al guardar el cliente.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "No has sido registrado correctamente. Ya hay una cuenta con este correo: " + eMail, "Registro No Exitoso", JOptionPane.ERROR_MESSAGE);
+            }
 
-    fisCliente.close();
-}
-catch (IOException ioe) {
-    System.out.println("Error IO: " + ioe.toString());
-}
-catch (Exception e) {
-    System.out.println("Error: " + e.toString());
-}
-
-            
-            
-            
-        this.dispose();
-            
-        }else if(!si){
+        } else {
             JOptionPane.showMessageDialog(this, "No has sido registrado correctamente. Rellene todas las casillas por favor", "Registro No Exitoso", JOptionPane.ERROR_MESSAGE);
-        }else if(users.containsKey(eMail)){
-            JOptionPane.showMessageDialog(this, String.format("No has sido registrado correctamente. Ya hay una cuenta con este correo: %d ", eMail), "Registro No Exitoso", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
