@@ -5,22 +5,22 @@
 package pl2_java;
 
 import java.util.ArrayList;
-
+import java.io.*;
 /**
  *
  * @author Alejandro
  */
-public abstract class Cliente {
+public class Cliente implements Serializable {
     private String nombre;
     private String correo_electronico;
     private String clave;
-    private int teléfono;
+    private String teléfono;
     private String dirección; // (calle, número, ciudad y código postal).
     private String tarjeta_de_credito; //(nombre del titular, número de 16 dígitos y fecha de caducidad).
     private boolean VIP;
     private ArrayList<Evento> eventos; // eventos comprados.
 
-    public Cliente(String nombre, String correo_electronico, String clave, int teléfono, String dirección, String tarjeta_de_credito, boolean VIP) {
+    public Cliente(String nombre, String correo_electronico, String clave, String teléfono, String dirección, String tarjeta_de_credito, boolean VIP) {
         this.nombre = nombre;
         this.correo_electronico = correo_electronico;
         this.clave = clave;
@@ -48,7 +48,7 @@ public abstract class Cliente {
 
     
 
-    public int getTeléfono() {
+    public String getTeléfono() {
         return teléfono;
     }
 

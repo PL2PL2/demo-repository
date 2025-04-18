@@ -6,7 +6,8 @@ package Pl2_interfaz;
 
 import java.util.HashMap;
 import javax.swing.JOptionPane;
-
+import java.io.*;
+import pl2_java.*;
 /**
  *
  * @author daniel
@@ -61,6 +62,12 @@ public class User_Register extends javax.swing.JFrame {
         jLabel5.setText("Direction");
 
         jLabel6.setText("Phone-Number");
+
+        try {
+            jFormattedTextField4.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-##-##-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         jCheckBox1.setText("Mostrar");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -203,6 +210,7 @@ public class User_Register extends javax.swing.JFrame {
 
     private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox3ActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jCheckBox3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -215,13 +223,40 @@ public class User_Register extends javax.swing.JFrame {
         String phoneNumber = jFormattedTextField4.getText();
         String key = new String(jPasswordField1.getPassword());
         String creditCard = new String(jPasswordField2.getPassword());
+        boolean VIP = jCheckBox3.isSelected();
+        
         Boolean si = (!name.isEmpty() && !eMail.isEmpty() && !direction.isEmpty() && !phoneNumber.isEmpty() && !key.isEmpty() && !creditCard.isEmpty());
         if((si) && !users.containsKey(eMail)){
             JOptionPane.showMessageDialog(this, "Has sido registrado correctamente. Inicie sesión para continuar", "Registro Exitoso", JOptionPane.INFORMATION_MESSAGE);
             users.put(eMail, key);
             user.setVisible(true);
-            this.dispose();
-
+        try{ //Esto es para guardar el objeto completo de cliente
+            Cliente c = new Cliente(name,eMail,key,phoneNumber,direction,creditCard,VIP);
+            FileOutputStream fosCliente = new FileOutputStream("registroClientes.dat");
+            ObjectOutputStream oosCliente = new ObjectOutputStream(fosCliente);
+            oosCliente.writeObject(c);
+            FileInputStream fisCliente = new FileInputStream("registroClientes.dat");
+            ObjectInputStream oisCliente = new ObjectInputStream(fisCliente);
+            try {
+                while (true) {
+                        Cliente per = (Cliente) oisCliente.readObject();
+                        System.out.println (per.toString());
+                    }
+                } catch (EOFException e) {
+                    System.out.println ("Lectura de los objetos de tipo Cliente finalizada");
+            }
+                fisCliente.close();
+        }
+        catch (IOException ioe){
+            System.out.println("Error IO: "+ioe.toString());
+        }
+        catch(Exception e){
+            System.out.println("Error: "+e.toString());
+        }
+            
+            
+            
+        this.dispose();
             
         }else if(!si){
             JOptionPane.showMessageDialog(this, "No has sido registrado correctamente. Rellene todas las casillas por favor", "Registro No Exitoso", JOptionPane.ERROR_MESSAGE);
