@@ -180,7 +180,7 @@ public class Login_User extends javax.swing.JFrame {
                 try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo))) {
                     while (true) {
                         Cliente existente = (Cliente) ois.readObject();
-                        if (existente.getCorreo_electronico().equals(user)) {
+                        if (existente.getCorreo_electronico().equals(user) && existente.getClave().equals(password)) {
                             existe = true;
                             break;
                         }
@@ -196,7 +196,7 @@ public class Login_User extends javax.swing.JFrame {
                 inicio.setVisible(true);
                 this.dispose();
             }else{
-                JOptionPane.showMessageDialog(this, "No se ha encontrado su correo", "Usuario no encontrado", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "No se ha encontrado su cuenta", "Usuario no encontrado", JOptionPane.ERROR_MESSAGE);
             }
         }
        
