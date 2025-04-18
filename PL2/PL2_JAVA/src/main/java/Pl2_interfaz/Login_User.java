@@ -199,6 +199,10 @@ public class Login_User extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "No se ha encontrado su cuenta", "Usuario no encontrado", JOptionPane.ERROR_MESSAGE);
             }
         }
+        else{
+             JOptionPane.showMessageDialog(this, "Formato de correo erróneo.", "Usuario no encontrado", JOptionPane.ERROR_MESSAGE);
+
+        }
        
     }//GEN-LAST:event_jButton1ActionPerformed
 
