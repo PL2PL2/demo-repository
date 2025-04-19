@@ -182,7 +182,7 @@ public class Login_User extends javax.swing.JFrame {
         String user = jFormattedTextField1.getText();
         String password = new String(jPasswordField1.getPassword());
         boolean existe = false;
-        
+        boolean contraseña = false;
         if(user.matches(".+@.+\\..+")){
             File archivo = new File("registroClientes.dat");
             
@@ -190,9 +190,14 @@ public class Login_User extends javax.swing.JFrame {
                 try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo))) {
                     while (true) {
                         Cliente existente = (Cliente) ois.readObject();
-                        if (existente.getCorreo_electronico().equals(user) && existente.getClave().equals(password)) {
+                        if (existente.getCorreo_electronico().equals(user)) {
+                            
                             existe = true;
+                            if(existente.getClave().equals(password)){
+                                contraseña = true;
+                            }
                             break;
+                        
                         }
                     }
                 } catch (EOFException eof) {
@@ -201,12 +206,15 @@ public class Login_User extends javax.swing.JFrame {
                     e.printStackTrace();
                 }
             }
-            if(existe){
+            if(existe && contraseña){
                 cargando msg = new cargando("Cargando...", "Esperando al servidor", 1000);
                 inicio.setVisible(true);
                 this.dispose();
-            }else{
-                JOptionPane.showMessageDialog(this, "No se ha encontrado su cuenta", "Usuario no encontrado", JOptionPane.ERROR_MESSAGE);
+            }else if(existe && !contraseña){
+                JOptionPane.showMessageDialog(this, "Contraseña incorrecta.", "Usuario no encontrado", JOptionPane.ERROR_MESSAGE);
+            }
+            else if(!existe && !contraseña){
+                JOptionPane.showMessageDialog(this, "No se ha encontrado su correo electrónico.", "Usuario no encontrado", JOptionPane.ERROR_MESSAGE);
             }
         }
         else{
