@@ -252,7 +252,7 @@ public class Login_User extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        Recuperar_Contraseña recuperar = new Recuperar_Contraseña();
+        Introducir_Correo recuperar = new Introducir_Correo();
         recuperar.setVisible(true);
         this.dispose();
         
