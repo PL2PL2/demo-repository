@@ -22,6 +22,10 @@ public class Introducir_Contraseña_Nueva extends javax.swing.JFrame {
     public Introducir_Contraseña_Nueva() {
         initComponents();
     }
+    public Cliente cliente;
+    public Introducir_Contraseña_Nueva(Cliente cliente){
+        this.cliente = cliente;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
