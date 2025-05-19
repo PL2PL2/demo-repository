@@ -7,13 +7,14 @@ package Pl2_interfaz;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 import java.io.*;
+import java.util.ArrayList;
 import pl2_java.*;
 /**
  *
  * @author daniel
  */
 public class User_Register extends javax.swing.JFrame {
-
+    private ArrayList<Cliente> clientes;
     /**
      * Creates new form User_Register
      */
@@ -215,6 +216,10 @@ public class User_Register extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        File archivo = new File("registroClientes.dat");
+        
+        ManejarDatos.cargarDatos();
+        clientes = ManejarDatos.getClientes();
         Login_User user = new Login_User();
         HashMap<String, String> users = new HashMap<>();
         String name = jFormattedTextField1.getText();
@@ -231,51 +236,44 @@ public class User_Register extends javax.swing.JFrame {
         Cliente nuevoCliente = new Cliente(name, eMail, key, phoneNumber, direction, creditCard, VIP);
 
         if (camposCompletos) {
-            File archivo = new File("registroClientes.dat");
-
-            // Primero comprobamos si el cliente ya existe
-            if (archivo.exists() && archivo.length() > 0) {
-                try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo))) {
-                    while (true) {
-                        Cliente existente = (Cliente) ois.readObject();
-                        if (existente.getCorreo_electronico().equals(eMail)) {
+            if(archivo.length() != 0){
+            try{
+            for(Cliente c:clientes){
+                       
+                    if (c.getCorreo_electronico().equals(eMail)) {
+                            
                             existe = true;
                             break;
-                        }
+                        
                     }
-                } catch (EOFException eof) {
-                    // fin del archivo
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
             }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+    }
+            
+
+ 
 
             if (!existe) {
-                try {
-                    FileOutputStream fos = new FileOutputStream(archivo, true);
-                    ObjectOutputStream oos;
-                    if (archivo.length() == 0) {
-                        oos = new ObjectOutputStream(fos); // Escribe encabezado
-                    } else {
-                        oos = new MiObjectOutputStream(fos); // clase que no escribe encabezado
-                    }
-
-                    oos.writeObject(nuevoCliente);
-                    oos.close();
-
-                    JOptionPane.showMessageDialog(this, "Has sido registrado correctamente. Inicie sesión para continuar", "Registro Exitoso", JOptionPane.INFORMATION_MESSAGE);
+                clientes.add(nuevoCliente);
+                JOptionPane.showMessageDialog(this, "Has sido registrado correctamente. Inicie sesión para continuar", "Registro Exitoso", JOptionPane.INFORMATION_MESSAGE);
                     // users.put(eMail, key);
                     user.setVisible(true);
+                    ManejarDatos.guardarDatos();
                     this.dispose();
-                } catch (IOException ioe) {
-                    ioe.printStackTrace();
-                    JOptionPane.showMessageDialog(this, "Error al guardar el cliente.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            } else {
+            }
+                
+
+                    
+                
+            else {
                 JOptionPane.showMessageDialog(this, "No has sido registrado correctamente. Ya hay una cuenta con este correo: " + eMail, "Registro No Exitoso", JOptionPane.ERROR_MESSAGE);
             }
-
-        } else {
+            
+        }
+         else {
             JOptionPane.showMessageDialog(this, "No has sido registrado correctamente. Rellene todas las casillas por favor", "Registro No Exitoso", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -7,6 +7,8 @@ package Pl2_interfaz;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.ListIterator;
 import pl2_java.*;
 
 /*
@@ -33,6 +35,8 @@ public class Login_User extends javax.swing.JFrame {
     /**
      * Creates new form Registro_Login
      */
+    private ArrayList<Cliente> clientes;
+    //private ListIterator<Cliente> li;
     public Login_User() {
         initComponents();
     }
@@ -174,6 +178,9 @@ public class Login_User extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        ManejarDatos.cargarDatos();
+        clientes = ManejarDatos.getClientes();
+        //li = clientes.listIterator();
         Login_User si = new Login_User();
         Inicio_Usuario inicio = new Inicio_Usuario();
         HashMap<String, String> users = new HashMap<>();
@@ -184,27 +191,22 @@ public class Login_User extends javax.swing.JFrame {
         boolean existe = false;
         boolean contraseña = false;
         if(user.matches(".+@.+\\..+")){
-            File archivo = new File("registroClientes.dat");
-            
-            if(archivo.exists() && archivo.length() > 0){
-                try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo))) {
-                    while (true) {
-                        Cliente existente = (Cliente) ois.readObject();
-                        if (existente.getCorreo_electronico().equals(user)) {
+          try{
+            for(Cliente c:clientes){
+                       
+                    if (c.getCorreo_electronico().equals(user)) {
                             
                             existe = true;
-                            if(existente.getClave().equals(password)){
+                            if(c.getClave().equals(password)){
                                 contraseña = true;
                             }
                             break;
                         
-                        }
                     }
-                } catch (EOFException eof) {
-                    // fin del archivo
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
+            }
+            catch (Exception e){
+                e.printStackTrace();
             }
             if(existe && contraseña){
                 cargando msg = new cargando("Cargando...", "Esperando al servidor", 1000);
