@@ -4,13 +4,16 @@
  */
 package pl2_java;
 
+import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
 /**
  *
  * @author Alejandro
  */
-public class Evento {
+public class Evento implements Serializable {
 private String titulo; //(breve descripción del evento que aparece como encabezado, ejemplo: “Concierto de Arde Bogotá”).
 private String tipo; //(Concierto, Deporte, Musical, Teatro)
 private String direccion; //(calle, número, ciudad y código postal).
@@ -18,6 +21,7 @@ private String fechas;// y horas de celebración. Puede ser que un evento solo s
 private Double precio; //de la entrada.
 private String portada; //(imagen del evento).
 private ArrayList<Double> calificaciones; //(media de las reseñas sobre 5)
+private ImageIcon imagen;
 
     public Evento(String titulo, String tipo, String direccion, String fechas, Double precio, String portada) {
         this.titulo = titulo;
@@ -26,9 +30,20 @@ private ArrayList<Double> calificaciones; //(media de las reseñas sobre 5)
         this.fechas = fechas;
         this.precio = precio;
         this.portada = portada;
+        this.imagen = cargarImagen(portada);
         this.calificaciones = new ArrayList<>();
     }
-
+    
+    private ImageIcon cargarImagen(String rutaRelativa) {
+    try {
+        String rutaCompleta = System.getProperty("user.dir") + File.separator + "Portadas" + File.separator + rutaRelativa;
+        return new ImageIcon(rutaCompleta);
+    } catch (Exception e) {
+        System.out.println("Error al cargar imagen: " + rutaRelativa);
+        return null;
+    }
+}
+    
     public String getTitulo() {
         return titulo;
     }
@@ -75,6 +90,11 @@ private ArrayList<Double> calificaciones; //(media de las reseñas sobre 5)
 
     public void setPortada(String portada) {
         this.portada = portada;
+        this.imagen = cargarImagen(portada); // actualiza imagen también
+    }
+
+    public ImageIcon getImagen() {
+        return imagen;
     }
 
     public void agregarReseña(double c) {

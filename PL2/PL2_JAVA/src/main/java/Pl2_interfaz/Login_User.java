@@ -178,7 +178,7 @@ public class Login_User extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        ManejarDatos.cargarDatos();
+        ManejarDatos.cargarClientes();
         clientes = ManejarDatos.getClientes();
         //li = clientes.listIterator();
         Login_User si = new Login_User();

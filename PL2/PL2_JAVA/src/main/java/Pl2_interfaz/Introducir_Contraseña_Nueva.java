@@ -100,7 +100,7 @@ public class Introducir_Contraseña_Nueva extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        ManejarDatos.cargarDatos();
+        ManejarDatos.cargarClientes();
         clientes = ManejarDatos.getClientes();
         String new_password = jFormattedTextField1.getText();
         boolean verdad = false;
@@ -112,7 +112,7 @@ public class Introducir_Contraseña_Nueva extends javax.swing.JFrame {
                 clientes.remove(index);
                 Cliente nuevo = new Cliente(cliente.getNombre(), cliente.getCorreo_electronico(), new_password, cliente.getTeléfono(), cliente.getDirección(), cliente.getTarjeta_de_credito(), cliente.isVIP());
                 clientes.add(nuevo);
-                ManejarDatos.guardarDatos();
+                ManejarDatos.guardarClientes();
                 System.out.println(clientes);
                 Login_User login = new Login_User();
                 login.setVisible(true);

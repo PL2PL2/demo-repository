@@ -28,7 +28,7 @@ public class Introducir_Correo extends javax.swing.JFrame {
     private ArrayList<Cliente> clientes;
     public Introducir_Correo() {
         initComponents();
-        ManejarDatos.cargarDatos();
+        ManejarDatos.cargarClientes();
         clientes = ManejarDatos.getClientes();
         for(Cliente c: clientes){
             jComboBox1.addItem(c.getCorreo_electronico());
@@ -148,7 +148,7 @@ public class Introducir_Correo extends javax.swing.JFrame {
         String eMail = jFormattedTextField1.getText();
         boolean existe = false;
         String correo = "";
-        ManejarDatos.cargarDatos();
+        ManejarDatos.cargarClientes();
         clientes = ManejarDatos.getClientes();
         
         for(Cliente c : clientes){

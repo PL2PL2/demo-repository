@@ -4,11 +4,21 @@
  */
 package Pl2_interfaz;
 
+import java.io.File;
+import java.util.ArrayList;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import pl2_java.Evento;
+import pl2_java.ManejarDatos;
+
 /**
  *
  * @author daniel
  */
 public class Añadir_Evento extends javax.swing.JFrame {
+private String rutaPortada;
+private ArrayList<Evento> eventos;
+
 
     /**
      * Creates new form Añadir_Evento
@@ -39,6 +49,8 @@ public class Añadir_Evento extends javax.swing.JFrame {
         jFormattedTextField5 = new javax.swing.JFormattedTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,14 +70,30 @@ public class Añadir_Evento extends javax.swing.JFrame {
 
         jLabel5.setText("Fechas");
 
+        jFormattedTextField4.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+
         jLabel6.setText("Precio");
 
         jButton1.setText("AÑADIR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("SALIR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Portada");
+
+        jButton3.setText("Elegir Imagen");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -103,8 +131,11 @@ public class Añadir_Evento extends javax.swing.JFrame {
                                         .addComponent(jLabel4))
                                     .addGroup(layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 72, Short.MAX_VALUE))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButton3))))))
+                        .addGap(0, 54, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButton2)
@@ -130,12 +161,14 @@ public class Añadir_Evento extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jFormattedTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
+                    .addComponent(jFormattedTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -156,6 +189,82 @@ public class Añadir_Evento extends javax.swing.JFrame {
         eventos.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+            // TODO add your handling code here:
+        JFileChooser selector = new JFileChooser();
+                selector.setDialogTitle("Seleccionar imagen de portada");
+                selector.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                selector.setAcceptAllFileFilterUsed(false);
+                selector.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Imágenes", "jpg", "jpeg", "png", "gif"));
+
+                int resultado = selector.showOpenDialog(null);
+                if (resultado == JFileChooser.APPROVE_OPTION) {
+                    File archivoSeleccionado = selector.getSelectedFile();
+                    rutaPortada = archivoSeleccionado.getName();
+                    
+                    //lblRutaImagen.setText(rutaPortada);
+                }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        ManejarDatos.cargarEventos();
+        Inicio_Admin admin= new Inicio_Admin();
+        eventos = ManejarDatos.getEventos();
+        System.out.println("Inicio: Número de eventos actuales: " + eventos.size());
+        String Titulo=jFormattedTextField1.getText();
+        String Tipo=jFormattedTextField2.getText();
+        String Direccion=jFormattedTextField3.getText();
+        String Fechas=jFormattedTextField4.getText();
+        boolean existe=false;
+        Double Precio=null;
+        try{
+            Precio= Double.parseDouble(jFormattedTextField5.getText());
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Escribe un valor adecuado.", "Registro No Exitoso", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+        if(rutaPortada==null){
+            JOptionPane.showMessageDialog(this, "No has incluido la ruta de la portada.", "Registro No Exitoso", JOptionPane.ERROR_MESSAGE);
+        }
+        boolean camposCompletos = (!Titulo.isEmpty() && !Tipo.isEmpty() && !Direccion.isEmpty() &&
+                               !Fechas.isEmpty()) && rutaPortada!=null;
+        boolean TituloCoincide= false;
+        boolean IncongruenciaEspacioTemporal= false;
+        Evento eventoNuevo = new Evento(Titulo,Tipo,Direccion,Fechas,Precio,rutaPortada);
+        
+        if(camposCompletos){
+            for(Evento e:eventos){
+                if(e.getTitulo().equals(Titulo)){
+                    TituloCoincide=true;
+                    break;
+                }
+                if(e.getFechas().equals(Fechas)&&e.getDireccion().equals(Direccion)){
+                    IncongruenciaEspacioTemporal=true;
+                    break;
+                }
+            }
+            if(TituloCoincide==false && IncongruenciaEspacioTemporal==false){
+                existe=true;
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Completa toda la información.", "Registro No Exitoso", JOptionPane.ERROR_MESSAGE);
+        }
+        if(existe==true){
+            eventos.add(eventoNuevo);
+            JOptionPane.showMessageDialog(this, "Evento añadido exitosamente.", "Registro Exitoso", JOptionPane.INFORMATION_MESSAGE);
+            admin.setVisible(true);
+            ManejarDatos.setEventos(eventos);
+            ManejarDatos.guardarEventos();
+            System.out.println("Correcto: Número de eventos actuales: " + eventos.size());
+                this.dispose();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,6 +304,7 @@ public class Añadir_Evento extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextField2;
     private javax.swing.JFormattedTextField jFormattedTextField3;
@@ -206,5 +316,6 @@ public class Añadir_Evento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
 }

@@ -218,7 +218,7 @@ public class User_Register extends javax.swing.JFrame {
         // TODO add your handling code here:
         File archivo = new File("registroClientes.dat");
         
-        ManejarDatos.cargarDatos();
+        ManejarDatos.cargarClientes();
         clientes = ManejarDatos.getClientes();
         Login_User user = new Login_User();
         HashMap<String, String> users = new HashMap<>();
@@ -261,7 +261,7 @@ public class User_Register extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Has sido registrado correctamente. Inicie sesión para continuar", "Registro Exitoso", JOptionPane.INFORMATION_MESSAGE);
                     // users.put(eMail, key);
                     user.setVisible(true);
-                    ManejarDatos.guardarDatos();
+                    ManejarDatos.guardarClientes();
                     this.dispose();
             }
                 

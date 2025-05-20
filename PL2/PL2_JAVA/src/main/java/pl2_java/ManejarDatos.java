@@ -17,6 +17,7 @@ public class ManejarDatos {
     private static ArrayList<Cliente> clientes = new ArrayList<>();
     private static Cliente objcli;
     
+    
     public static void setClientes(ArrayList<Cliente> c) {
         clientes = c;
     }
@@ -48,13 +49,13 @@ public class ManejarDatos {
     
     
     
-     public static void cargarDatos() {
+     public static void cargarClientes() {
          File archivo = new File("registroClientes.dat");
 
         if (!archivo.exists()) {
             System.out.println("Archivo no encontrado. Se iniciará una lista vacía.");
             clientes = new ArrayList<Cliente>(); // inicializa vacío
-            guardarDatos();
+            guardarClientes();
             return;
         }
         try {
@@ -73,7 +74,7 @@ public class ManejarDatos {
     }//fin cargarDatos
 
     /** Guarda los datos de personas en el fichero */
-    public static void guardarDatos() {
+    public static void guardarClientes() {
         File archivo = new File("registroClientes.dat");
         try {
             //Si hay datos los guardamos...
@@ -93,6 +94,93 @@ public class ManejarDatos {
                 //guardamos el array de personas
                 oosCli.writeObject(clientes);
                 ostreamCli.close();
+                }
+            }
+
+        } catch (IOException ioe) {
+            System.out.println("Error de IO: " + ioe.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+    
+    
+    public static void setEventos(ArrayList<Evento> e) {
+        eventos = e;
+    }
+
+    /**@return Devuelve el ArrayList de personas */
+    public static ArrayList<Evento> getEventos() {
+        //Comparador para ordenar las personas por su nombre
+        Comparator NomEveComp = new Comparator() {
+
+            @Override
+            public int compare(Object o1, Object o2) {
+                Evento e1 = (Evento) o1;
+                Evento e2 = (Evento) o2;
+                return e1.getTitulo().compareTo(e2.getTitulo());
+            }
+        };
+        //Ordenamos el array
+        Collections.sort(clientes, NomEveComp);
+        return eventos;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     public static void cargarEventos() {
+         File archivo = new File("registroEventos.dat");
+
+        if (!archivo.exists()) {
+            System.out.println("Archivo no encontrado. Se iniciará una lista vacía.");
+            eventos = new ArrayList<Evento>(); // inicializa vacío
+            guardarEventos();
+            return;
+        }
+        try {
+            //Lectura de los objetos de tipo persona
+            FileInputStream istreamEve = new FileInputStream("registroEventos.dat");
+            ObjectInputStream oisEve = new ObjectInputStream(istreamEve);
+            eventos = (ArrayList) oisEve.readObject();
+            istreamEve.close();
+        } catch (IOException ioe) {
+            System.out.println("Error de IO: " + ioe.getMessage());
+        } catch (ClassNotFoundException cnfe) {
+            System.out.println("Error de clase no encontrada: " + cnfe.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }//fin cargarDatos
+
+    /** Guarda los datos de personas en el fichero */
+    public static void guardarEventos() {
+        File archivo = new File("registroEventos.dat");
+        try {
+            //Si hay datos los guardamos...
+            if (!eventos.isEmpty()) {
+                /****** Serialización de los objetos ******/
+                //Serialización de las personas
+                FileOutputStream ostreamEve = new FileOutputStream("registroEventos.dat");
+                ObjectOutputStream oosEve = new ObjectOutputStream(ostreamEve);
+                //guardamos el array de personas
+                oosEve.writeObject(eventos);
+                ostreamEve.close();
+            } else {
+                System.out.println("Error: No hay datos...");
+                if(!archivo.exists()){
+                    FileOutputStream ostreamEve = new FileOutputStream("registroEventos.dat");
+                ObjectOutputStream oosEve = new ObjectOutputStream(ostreamEve);
+                //guardamos el array de personas
+                oosEve.writeObject(eventos);
+                ostreamEve.close();
                 }
             }
 
