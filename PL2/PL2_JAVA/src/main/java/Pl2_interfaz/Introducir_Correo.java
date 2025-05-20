@@ -11,9 +11,11 @@ import java.io.ObjectInputStream;
 import java.io.EOFException;
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Random;
 import javax.swing.JOptionPane;
+import pl2_java.ManejarDatos;
 /**
  *
  * @author daniel
@@ -23,8 +25,14 @@ public class Introducir_Correo extends javax.swing.JFrame {
     /**
      * Creates new form Introducir_Correo
      */
+    private ArrayList<Cliente> clientes;
     public Introducir_Correo() {
         initComponents();
+        ManejarDatos.cargarDatos();
+        clientes = ManejarDatos.getClientes();
+        for(Cliente c: clientes){
+            jComboBox1.addItem(c.getCorreo_electronico());
+        }
     }
 
     /**
@@ -43,6 +51,7 @@ public class Introducir_Correo extends javax.swing.JFrame {
         jFormattedTextField2 = new javax.swing.JFormattedTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,6 +72,13 @@ public class Introducir_Correo extends javax.swing.JFrame {
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
             }
         });
 
@@ -93,13 +109,19 @@ public class Introducir_Correo extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton2)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(44, 44, 44)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -114,44 +136,41 @@ public class Introducir_Correo extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pack();
+        setSize(new java.awt.Dimension(400, 337));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    String codigo = "";
+    String codigo = "1234";
     Cliente necesitado = null;
+    int index = 0;
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:      
         String eMail = jFormattedTextField1.getText();
         boolean existe = false;
-        File archivo = new File("registroClientes.dat");
-
-        // Primero comprobamos si el cliente ya existe
-        if (archivo.exists() && archivo.length() > 0) {
-            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo))) {
-                while (true) {
-                    Cliente existente = (Cliente) ois.readObject();
-                    if (existente.getCorreo_electronico().equals(eMail)) {
-                        existe = true;
-                        necesitado = existente;
-                        break;
-                    }
-                }
-            } catch (EOFException eof) {
-                // fin del archivo
-            } catch (Exception e) {
-                e.printStackTrace();
+        String correo = "";
+        ManejarDatos.cargarDatos();
+        clientes = ManejarDatos.getClientes();
+        
+        for(Cliente c : clientes){
+            if (c.getCorreo_electronico().equals(eMail)){
+                existe = true;
+                necesitado = c;
+                break;
             }
+            index += 1;
         }
+            
         
         Random rand = new Random();
 
         if(existe){
+            codigo = "";
             for(int i = 0; i < 4; i++){
                 codigo += rand.nextInt(10);
             }
             send(eMail, "Recuperacion de contraseña", "Tu codigo es: " + codigo);
         }else{
-            JOptionPane.showMessageDialog(this, "Correono encontrado", "Correo no encontrado", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Correo no encontrado", "Correo no encontrado", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -160,11 +179,20 @@ public class Introducir_Correo extends javax.swing.JFrame {
         String code = jFormattedTextField2.getText();
         if(code.equals(codigo)){
             JOptionPane.showMessageDialog(this, "Codigo correcto", "Validado", JOptionPane.INFORMATION_MESSAGE);
+            Introducir_Contraseña_Nueva contraseña = new Introducir_Contraseña_Nueva(necesitado, index);
+            System.out.println(necesitado);
+            contraseña.setVisible(true);
+            this.dispose();
         }else{
             JOptionPane.showMessageDialog(this, "Codigo incorrecto", "No validado", JOptionPane.ERROR_MESSAGE);
 
         }
+
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
     public static void send(String to, String subject, String msg) {
         final String user = "pruebapl2pl2pl2@gmail.com"; // correo emisor
         final String pass = "bkdb okmn zcmz ffnq "; // contraseña del correo o clave de aplicación
@@ -235,6 +263,7 @@ public class Introducir_Correo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextField2;
     private javax.swing.JLabel jLabel1;

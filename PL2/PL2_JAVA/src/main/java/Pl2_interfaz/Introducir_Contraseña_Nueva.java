@@ -8,7 +8,10 @@ import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import pl2_java.Cliente;
+import pl2_java.ManejarDatos;
 
 /**
  *
@@ -19,13 +22,15 @@ public class Introducir_Contraseña_Nueva extends javax.swing.JFrame {
     /**
      * Creates new form Introducir_Contraseña_Nueva
      */
-    public Introducir_Contraseña_Nueva() {
+    private Cliente cliente;
+    private int index;
+    private ArrayList<Cliente> clientes;
+    public Introducir_Contraseña_Nueva(Cliente c, int index) {
+        this.cliente = c;
+        this.index = index;
         initComponents();
     }
-    public Cliente cliente;
-    public Introducir_Contraseña_Nueva(Cliente cliente){
-        this.cliente = cliente;
-    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -89,47 +94,76 @@ public class Introducir_Contraseña_Nueva extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pack();
+        setSize(new java.awt.Dimension(400, 337));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        ManejarDatos.cargarDatos();
+        clientes = ManejarDatos.getClientes();
+        String new_password = jFormattedTextField1.getText();
+        boolean verdad = false;
+        System.out.println(clientes);
+        System.out.println(cliente);
+        try{
+            if (!new_password.equals(cliente.getClave())){
+                System.out.println(new_password);
+                clientes.remove(index);
+                Cliente nuevo = new Cliente(cliente.getNombre(), cliente.getCorreo_electronico(), new_password, cliente.getTeléfono(), cliente.getDirección(), cliente.getTarjeta_de_credito(), cliente.isVIP());
+                clientes.add(nuevo);
+                ManejarDatos.guardarDatos();
+                System.out.println(clientes);
+                Login_User login = new Login_User();
+                login.setVisible(true);
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(this, "Utiliza una contraseña diferente", "Contraseña ya utilizada", JOptionPane.ERROR_MESSAGE);
+            }
+                
+            
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Introducir_Contraseña_Nueva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Introducir_Contraseña_Nueva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Introducir_Contraseña_Nueva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Introducir_Contraseña_Nueva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+// public static void main(String args[]) {
+//     /* Set the Nimbus look and feel */
+//     // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//     /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//      * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//      */
+//     try {
+//         for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//             if ("Nimbus".equals(info.getName())) {
+//                 javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                 break;
+//             }
+//         }
+//     } catch (ClassNotFoundException ex) {
+//         java.util.logging.Logger.getLogger(Introducir_Contraseña_Nueva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//     } catch (InstantiationException ex) {
+//         java.util.logging.Logger.getLogger(Introducir_Contraseña_Nueva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//     } catch (IllegalAccessException ex) {
+//         java.util.logging.Logger.getLogger(Introducir_Contraseña_Nueva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//     } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//         java.util.logging.Logger.getLogger(Introducir_Contraseña_Nueva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//     }
+//     // </editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Introducir_Contraseña_Nueva().setVisible(true);
-            }
-        });
-    }
+//     /* Create and display the form */
+//     java.awt.EventQueue.invokeLater(new Runnable() {
+//         public void run() {
+//             new Introducir_Contraseña_Nueva().setVisible(true);
+//         }
+//     });
+// }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
