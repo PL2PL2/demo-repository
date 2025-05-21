@@ -16,6 +16,7 @@ import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import pl2_java.Evento;
@@ -32,7 +33,9 @@ public class Ver_Eventos extends javax.swing.JFrame {
      */
 
     public Ver_Eventos() {
+        
         initComponents();
+        this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         cargarEventosEnPanel();
 
     }
@@ -48,8 +51,9 @@ public class Ver_Eventos extends javax.swing.JFrame {
 
         scrollEventos = new javax.swing.JScrollPane();
         panelEventos = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -59,18 +63,29 @@ public class Ver_Eventos extends javax.swing.JFrame {
         panelEventos.setLayout(new javax.swing.BoxLayout(panelEventos, javax.swing.BoxLayout.Y_AXIS));
         scrollEventos.setViewportView(panelEventos);
 
+        jButton1.setText("...");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                 .addComponent(scrollEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(scrollEventos, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jButton1)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -79,13 +94,21 @@ public class Ver_Eventos extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
-        new Gestionar_Eventos().setVisible(true);
+       
     }//GEN-LAST:event_formWindowClosed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Gestionar_Eventos gev= new Gestionar_Eventos();
+        gev.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     private void cargarEventosEnPanel() {
+        
     pl2_java.ManejarDatos.cargarEventos();
     java.util.ArrayList<pl2_java.Evento> eventos = pl2_java.ManejarDatos.getEventos();
 
@@ -121,7 +144,7 @@ public class Ver_Eventos extends javax.swing.JFrame {
 
     
     JTextArea texto = new JTextArea();
-    texto.setText("Título: " + e.getTitulo() + "\nTipo: " + e.getTipo() + "\nDirección: " + e.getDireccion()+ "\nFechas: " + e.getFechas() + "\nPrecio: " + e.getPrecio() );
+    texto.setText("Título: " + e.getTitulo() + "\nTipo: " + e.getTipo() + "\nDirección: " + e.getDireccion()+ "\nFechas: " + e.getFechas() + "\nPrecio: " + e.getPrecio() + "€" );
     texto.setEditable(false);
     texto.setLineWrap(true);
     texto.setWrapStyleWord(true);
@@ -135,6 +158,11 @@ public class Ver_Eventos extends javax.swing.JFrame {
         public void actionPerformed(ActionEvent evt) {
             // Falta hacer toda la logica...
             System.out.println("Editar: " + e.getTitulo());
+            editarEvento(e);
+            
+            
+            
+            
             
         }
     });
@@ -145,7 +173,7 @@ public class Ver_Eventos extends javax.swing.JFrame {
         public void actionPerformed(ActionEvent evt) {
             //Falta hacer toda la logica...
             System.out.println("Eliminar: " + e.getTitulo());
-            
+            eliminarEvento(e);
         }
     });
 
@@ -165,6 +193,29 @@ public class Ver_Eventos extends javax.swing.JFrame {
     }
 
     
+}
+    
+    private void eliminarEvento(Evento evento) {
+    int confirm = JOptionPane.showConfirmDialog(this, "¿Estás seguro de eliminar este evento?",
+                                                "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+    if (confirm == JOptionPane.YES_OPTION) {
+        ArrayList<Evento> eventos = ManejarDatos.getEventos();
+        eventos.remove(evento);
+        ManejarDatos.setEventos(eventos);
+        ManejarDatos.guardarEventos();
+
+        JOptionPane.showMessageDialog(this, "Evento eliminado exitosamente.");
+        // Recargar vista
+        
+        this.dispose();
+        new Ver_Eventos().setVisible(true);
+    }
+   
+  }
+    
+    private void editarEvento(Evento evento) {
+    this.dispose();
+    new Editar_Evento(evento).setVisible(true);  // Crear un JFrame para editar evento
 }
     
     public static void main(String args[]) {
@@ -200,6 +251,7 @@ public class Ver_Eventos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel panelEventos;
     private javax.swing.JScrollPane scrollEventos;
     // End of variables declaration//GEN-END:variables
