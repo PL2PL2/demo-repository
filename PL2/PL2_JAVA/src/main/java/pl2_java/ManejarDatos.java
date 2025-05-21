@@ -122,7 +122,7 @@ public class ManejarDatos {
             }
         };
         //Ordenamos el array
-        Collections.sort(clientes, NomEveComp);
+        Collections.sort(eventos, NomEveComp);
         return eventos;
     }
     

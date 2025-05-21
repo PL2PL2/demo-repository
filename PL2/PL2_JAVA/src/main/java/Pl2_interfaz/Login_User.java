@@ -34,7 +34,7 @@ public class Login_User extends javax.swing.JFrame {
     
     /**
      * Creates new form Registro_Login
-     */
+         */
     private ArrayList<Cliente> clientes;
     //private ListIterator<Cliente> li;
     public Login_User() {

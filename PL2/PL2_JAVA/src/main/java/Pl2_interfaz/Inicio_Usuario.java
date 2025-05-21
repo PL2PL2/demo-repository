@@ -3,7 +3,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Pl2_interfaz;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.util.ArrayList;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
 import pl2_java.Cliente;
+import pl2_java.Evento;
+import pl2_java.ManejarDatos;
+import javax.swing.BoxLayout;
+import javax.swing.JTextArea;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Alejandro
@@ -14,11 +26,29 @@ public class Inicio_Usuario extends javax.swing.JFrame {
      * Creates new form Inicio_Usuario
      */
     private Cliente cliente;
+    private ArrayList<Evento> eventos;
+    private ArrayList<Cliente> clientes;
+
     public Inicio_Usuario(Cliente c) {
         this.cliente = c;
+        ManejarDatos.cargarClientes();
+        clientes = ManejarDatos.getClientes();
         initComponents();
-    }
+        jScrollPane1.getVerticalScrollBar().setUnitIncrement(20);
+        setExtendedState(this.MAXIMIZED_BOTH);
+        jPanel2.setLayout(new BoxLayout(jPanel2, BoxLayout.Y_AXIS));
+        jComboBox1.removeAllItems();
+        jComboBox1.addItem("Titulo");
+        jComboBox1.addItem("Tipo");
+        jComboBox1.addItem("Direccion");
+        jComboBox1.addItem("Fechas");
+        jComboBox1.addItem("Precio");
 
+        cargarEventos();
+    }
+    public void cargarEventos(){
+
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,7 +63,10 @@ public class Inicio_Usuario extends javax.swing.JFrame {
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jLabel2 = new javax.swing.JLabel();
         scrollbar1 = new java.awt.Scrollbar();
-        panel1 = new java.awt.Panel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel2 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -55,16 +88,29 @@ public class Inicio_Usuario extends javax.swing.JFrame {
 
         jLabel2.setText("Buscador:");
 
-        javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
-        panel1.setLayout(panel1Layout);
-        panel1Layout.setHorizontalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 722, Short.MAX_VALUE)
         );
-        panel1Layout.setVerticalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 406, Short.MAX_VALUE)
         );
+
+        jScrollPane1.setViewportView(jPanel2);
+
+        jButton2.setText("BUSCAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -72,23 +118,26 @@ public class Inicio_Usuario extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(269, 269, 269)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(83, 83, 83)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(76, 76, 76)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
                                 .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(102, 102, 102)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(scrollbar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
+                                .addComponent(jButton2))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 724, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(1431, 1431, 1431)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollbar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(837, 837, 837)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(770, 770, 770))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,18 +145,20 @@ public class Inicio_Usuario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(54, 54, 54)
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(scrollbar1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)))
-                .addGap(0, 18, Short.MAX_VALUE))
+                        .addGap(21, 21, 21)
+                        .addComponent(scrollbar1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 46, Short.MAX_VALUE))
         );
 
         setSize(new java.awt.Dimension(914, 607));
@@ -127,6 +178,70 @@ public class Inicio_Usuario extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
+    private void mostrarEventosFiltradosPorTipo(String criterio, String campo, JPanel panelDestino) {
+        ManejarDatos.cargarEventos();
+        eventos = ManejarDatos.getEventos();
+        panelDestino.removeAll();
+
+        eventos.stream()
+            .filter(ev -> {
+                switch (campo) {
+                    case "Tipo":
+                        return ev.getTipo().contains(criterio);
+                    case "Titulo":
+                        return ev.getTitulo().contains(criterio);
+                    case "Direccion":
+                        return ev.getDireccion().contains(criterio);
+                    case "Fechas":
+                        return ev.getFechas().contains(criterio);
+                    case "Precio":
+                        return ev.getPrecio().toString().contains(criterio);
+                    default:
+                        return false;
+                }
+            })
+            .forEach(ev -> {
+                Evento_Panel panel = new Evento_Panel();
+                panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 300));
+                panel.setAlignmentX(CENTER_ALIGNMENT);
+                panel.setBorder(BorderFactory.createCompoundBorder(
+                    BorderFactory.createEmptyBorder(10, 10, 10, 10),
+                    BorderFactory.createLineBorder(Color.GRAY, 1)
+                ));
+
+                String texto = "Título: " + ev.getTitulo() +
+                               "\nTipo: " + ev.getTipo() +
+                               "\nDirección: " + ev.getDireccion() +
+                               "\nFechas: " + ev.getFechas() +
+                               "\nPrecio: " + ev.getPrecio();
+                panel.setTexto(texto);
+                panel.setImagenEvento(ev.getImagen());
+
+                panelDestino.add(panel);
+                panelDestino.add(Box.createRigidArea(new Dimension(0, 10)));
+            });
+
+        panelDestino.revalidate();
+        panelDestino.repaint();
+    }
+
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        String selected = jComboBox1.getSelectedItem().toString();
+        String busqueda = jFormattedTextField1.getText();
+        if(selected.equals("Tipo") && !busqueda.isEmpty()){
+            mostrarEventosFiltradosPorTipo(busqueda, selected, jPanel2);
+        }else if(selected.equals("Titulo") && !busqueda.isEmpty()){
+            mostrarEventosFiltradosPorTipo(busqueda, selected, jPanel2);
+        }else if(selected.equals("Precio") && !busqueda.isEmpty()){
+            mostrarEventosFiltradosPorTipo(busqueda, selected, jPanel2);
+        }else if(selected.equals("Direccion") && !busqueda.isEmpty()){
+            mostrarEventosFiltradosPorTipo(busqueda, selected, jPanel2);
+        }else if(selected.equals("Fechas") && !busqueda.isEmpty()){
+            mostrarEventosFiltradosPorTipo(busqueda, selected, jPanel2);
+        }           
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -165,10 +280,14 @@ public class Inicio_Usuario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private java.awt.Panel panel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private java.awt.Scrollbar scrollbar1;
     // End of variables declaration//GEN-END:variables
 }
+
