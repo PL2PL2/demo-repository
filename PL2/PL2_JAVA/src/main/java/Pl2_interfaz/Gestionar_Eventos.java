@@ -137,12 +137,15 @@ public class Gestionar_Eventos extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         ManejarDatos.cargarEventos();
-        Inicio_Admin admin= new Inicio_Admin();
+        
         ArrayList<Evento> eventos = ManejarDatos.getEventos();
         for(Evento e:eventos){
             System.out.println(e.toString());
         }
         
+        Ver_Eventos ver= new Ver_Eventos();
+        ver.setVisible(true);
+        this.dispose();
         
         
     }//GEN-LAST:event_jButton3ActionPerformed
