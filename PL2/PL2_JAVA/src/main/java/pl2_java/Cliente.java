@@ -66,6 +66,13 @@ public class Cliente implements Serializable {
     public boolean isVIP() {
         return VIP;
     }
+    
+    public String getVip(){
+        if (VIP){
+            return "true";
+        }
+        return "false";
+    }
 
     
 

@@ -181,8 +181,8 @@ public class Login_User extends javax.swing.JFrame {
         ManejarDatos.cargarClientes();
         clientes = ManejarDatos.getClientes();
         //li = clientes.listIterator();
+        Cliente clientillo = null;
         Login_User si = new Login_User();
-        Inicio_Usuario inicio = new Inicio_Usuario();
         HashMap<String, String> users = new HashMap<>();
         users.put("pepe@gmail.com", "1234");
         users.put("paco@yahoo.es", "4567");
@@ -200,6 +200,7 @@ public class Login_User extends javax.swing.JFrame {
                             if(c.getClave().equals(password)){
                                 contraseña = true;
                             }
+                            clientillo = c;
                             break;
                         
                     }
@@ -210,6 +211,7 @@ public class Login_User extends javax.swing.JFrame {
             }
             if(existe && contraseña){
                 cargando msg = new cargando("Cargando...", "Esperando al servidor", 1000);
+                Inicio_Usuario inicio = new Inicio_Usuario(clientillo);
                 inicio.setVisible(true);
                 this.dispose();
             }else if(existe && !contraseña){
