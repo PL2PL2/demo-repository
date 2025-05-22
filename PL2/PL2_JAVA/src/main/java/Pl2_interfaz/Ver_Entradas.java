@@ -30,7 +30,7 @@ public class Ver_Entradas extends javax.swing.JFrame {
     private Evento ev;
     public Ver_Entradas(Cliente cl) {
         this.cliente = cl;
-        ManejarDatos.cargarReservas();;
+        ManejarDatos.cargarReservas();
         reservas = ManejarDatos.getReservas();
         initComponents();
         jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS)); // Cambio aquí
@@ -50,10 +50,11 @@ public class Ver_Entradas extends javax.swing.JFrame {
                 String texto = "Título: " + ev.getTitulo() +
                                "\nTipo: " + ev.getTipo() +
                                "\nDirección: " + ev.getDireccion() +
-                               "\nFechas: " + ev.getFechas() +
+                               "\nFecha elegida: " + r.getFecha() +
                                "\nPrecio: " + ev.getPrecio();
                 panel.setTexto(texto);
                 panel.setImagenEvento(ev.getImagen());
+                
 
                 jPanel1.add(panel);
                 jPanel1.add(Box.createRigidArea(new Dimension(0, 10)));

@@ -13,10 +13,11 @@ import java.io.Serializable;
 public class Reserva implements Serializable{
     private Cliente cliente;
     private Evento evento;
-    
-    public Reserva(Cliente cl, Evento ev){
+    private String fecha;
+    public Reserva(Cliente cl, Evento ev, String fecha){
         this.cliente = cl;
         this.evento = ev;
+        this.fecha= fecha;
     }
 
 
@@ -35,10 +36,19 @@ public class Reserva implements Serializable{
     public void setEvento(Evento evento) {
         this.evento = evento;
     }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+    
     
         @Override
     public String toString() {
-        return "Reserva{" + "cliente=" + cliente + ", evento=" + evento + '}';
+        return "Reserva{" + "cliente=" + cliente + ", evento=" + evento + ", fecha=" + fecha + '}';
     }
 
 }

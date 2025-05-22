@@ -28,8 +28,9 @@ public class Consultar_Eventos extends javax.swing.JFrame {
      */
     private Cliente cliente;
     public Consultar_Eventos() {
-        this.cliente = null;
         initComponents();
+        this.cliente = new Cliente("","","","","","",false);
+        
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(20);
         setExtendedState(this.MAXIMIZED_BOTH);
         jPanel2.setLayout(new BoxLayout(jPanel2, BoxLayout.Y_AXIS));
@@ -225,9 +226,6 @@ public class Consultar_Eventos extends javax.swing.JFrame {
         panelDestino.revalidate();
         panelDestino.repaint();
     }
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -29,6 +29,7 @@ public class Evento_Panel extends javax.swing.JPanel {
     private Evento evento;
     private Cliente cliente;
     private ArrayList<Reserva> reservas;
+    private String fechaSeleccionada;
     public Evento_Panel(Evento ev, Cliente cl) {
         this.evento = ev;
         this.cliente = cl;
@@ -52,7 +53,10 @@ public class Evento_Panel extends javax.swing.JPanel {
                 ((javax.swing.JScrollPane) scroll).dispatchEvent(e);
             }
         });
-
+        for(String fecha : ev.getFechas()){
+            jComboBox1.addItem(fecha);
+        }
+        this.fechaSeleccionada=(String) jComboBox1.getSelectedItem();
     }
     
     public void setTexto(String texto){
@@ -92,6 +96,7 @@ public class Evento_Panel extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -103,7 +108,6 @@ public class Evento_Panel extends javax.swing.JPanel {
         jPanel1.setPreferredSize(new java.awt.Dimension(400, 472));
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("jLabel1");
         jLabel1.setPreferredSize(new java.awt.Dimension(150, 150));
 
@@ -112,8 +116,6 @@ public class Evento_Panel extends javax.swing.JPanel {
         jTextArea2.setRows(5);
         jScrollPane2.setViewportView(jTextArea2);
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("RESERVAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,7 +132,10 @@ public class Evento_Panel extends javax.swing.JPanel {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(67, Short.MAX_VALUE))
         );
@@ -143,7 +148,9 @@ public class Evento_Panel extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
 
@@ -156,7 +163,7 @@ public class Evento_Panel extends javax.swing.JPanel {
         System.out.println(cliente);
         ManejarDatos.cargarReservas();
         reservas = ManejarDatos.getReservas();
-        Reserva nueva = new Reserva(cliente, evento);
+        Reserva nueva = new Reserva(cliente, evento, fechaSeleccionada);
         reservas.add(nueva);
         ManejarDatos.guardarReservas();
         jButton1.setText("RESERVADO");
@@ -167,6 +174,7 @@ public class Evento_Panel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

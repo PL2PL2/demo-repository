@@ -17,13 +17,13 @@ public class Evento implements Serializable {
 private String titulo; //(breve descripción del evento que aparece como encabezado, ejemplo: “Concierto de Arde Bogotá”).
 private String tipo; //(Concierto, Deporte, Musical, Teatro)
 private String direccion; //(calle, número, ciudad y código postal).
-private String fechas;// y horas de celebración. Puede ser que un evento solo se celebre una sola vez o se repita en el tiempo.
+private ArrayList<String> fechas;// y horas de celebración. Puede ser que un evento solo se celebre una sola vez o se repita en el tiempo.
 private Double precio; //de la entrada.
 private String portada; //(imagen del evento).
 private ArrayList<Double> calificaciones; //(media de las reseñas sobre 5)
 private ImageIcon imagen;
 
-    public Evento(String titulo, String tipo, String direccion, String fechas, Double precio, String portada) {
+    public Evento(String titulo, String tipo, String direccion, ArrayList<String> fechas, Double precio, String portada) {
         this.titulo = titulo;
         this.tipo = tipo;
         this.direccion = direccion;
@@ -68,11 +68,11 @@ private ImageIcon imagen;
         this.direccion = direccion;
     }
 
-    public String getFechas() {
+    public ArrayList<String> getFechas() {
         return fechas;
     }
 
-    public void setFechas(String fechas) {
+    public void setFechas(ArrayList<String> fechas) {
         this.fechas = fechas;
     }
 
