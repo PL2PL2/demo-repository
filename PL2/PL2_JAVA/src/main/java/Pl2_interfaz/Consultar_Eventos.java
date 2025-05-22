@@ -12,6 +12,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import pl2_java.Cliente;
 import pl2_java.Evento;
 import pl2_java.ManejarDatos;
 
@@ -25,7 +26,9 @@ public class Consultar_Eventos extends javax.swing.JFrame {
     /**
      * Creates new form Consultar_Eventos
      */
+    private Cliente cliente;
     public Consultar_Eventos() {
+        this.cliente = null;
         initComponents();
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(20);
         setExtendedState(this.MAXIMIZED_BOTH);
@@ -199,7 +202,7 @@ public class Consultar_Eventos extends javax.swing.JFrame {
                 }
             })
             .forEach(ev -> {
-                Evento_Panel panel = new Evento_Panel();
+                Evento_Panel panel = new Evento_Panel(ev, cliente);
                 panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 300));
                 panel.setAlignmentX(CENTER_ALIGNMENT);
                 panel.setBorder(BorderFactory.createCompoundBorder(

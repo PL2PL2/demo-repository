@@ -16,6 +16,8 @@ public class ManejarDatos {
     private static Evento objeve;
     private static ArrayList<Cliente> clientes = new ArrayList<>();
     private static Cliente objcli;
+    private static ArrayList<Reserva> reservas = new ArrayList<>();
+    private static Reserva objres;
     
     
     public static void setClientes(ArrayList<Cliente> c) {
@@ -181,6 +183,83 @@ public class ManejarDatos {
                 //guardamos el array de personas
                 oosEve.writeObject(eventos);
                 ostreamEve.close();
+                }
+            }
+
+        } catch (IOException ioe) {
+            System.out.println("Error de IO: " + ioe.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+    
+    public static void setReservas(ArrayList<Reserva> r) {
+        reservas = r;
+    }
+
+    /**@return Devuelve el ArrayList de personas */
+    public static ArrayList<Reserva> getReservas() {
+        //Comparador para ordenar las personas por su nombre
+        Comparator NomCliComp = new Comparator() {
+
+            @Override
+            public int compare(Object o1, Object o2) {
+                Reserva r1 = (Reserva) o1;
+                Reserva r2 = (Reserva) o2;
+                return r1.getCliente().getCorreo_electronico().compareTo(r2.getCliente().getCorreo_electronico());
+            }
+        };
+        //Ordenamos el array
+        Collections.sort(reservas, NomCliComp);
+        return reservas;
+    }
+    
+
+    public static void cargarReservas() {
+         File archivo = new File("registroReservas.dat");
+
+        if (!archivo.exists()) {
+            System.out.println("Archivo no encontrado. Se iniciará una lista vacía.");
+            reservas = new ArrayList<Reserva>(); // inicializa vacío
+            guardarReservas();
+            return;
+        }
+        try {
+            //Lectura de los objetos de tipo persona
+            FileInputStream istreamCli = new FileInputStream("registroReservas.dat");
+            ObjectInputStream oisCli = new ObjectInputStream(istreamCli);
+            reservas = (ArrayList) oisCli.readObject();
+            istreamCli.close();
+        } catch (IOException ioe) {
+            System.out.println("Error de IO: " + ioe.getMessage());
+        } catch (ClassNotFoundException cnfe) {
+            System.out.println("Error de clase no encontrada: " + cnfe.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }//fin cargarDatos
+
+    /** Guarda los datos de personas en el fichero */
+    public static void guardarReservas() {
+        File archivo = new File("registroReservas.dat");
+        try {
+            //Si hay datos los guardamos...
+            if (!reservas.isEmpty()) {
+                /****** Serialización de los objetos ******/
+                //Serialización de las personas
+                FileOutputStream ostreamCli = new FileOutputStream("registroReservas.dat");
+                ObjectOutputStream oosCli = new ObjectOutputStream(ostreamCli);
+                //guardamos el array de personas
+                oosCli.writeObject(reservas);
+                ostreamCli.close();
+            } else {
+                System.out.println("Error: No hay datos...");
+                if(!archivo.exists()){
+                    FileOutputStream ostreamCli = new FileOutputStream("registroReservas.dat");
+                ObjectOutputStream oosCli = new ObjectOutputStream(ostreamCli);
+                //guardamos el array de personas
+                oosCli.writeObject(reservas);
+                ostreamCli.close();
                 }
             }
 

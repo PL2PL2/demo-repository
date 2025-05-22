@@ -19,6 +19,7 @@ public class Cliente implements Serializable {
     private String tarjeta_de_credito; //(nombre del titular, número de 16 dígitos y fecha de caducidad).
     private boolean VIP;
     private ArrayList<Evento> eventos; // eventos comprados.
+    private ArrayList<Reserva> reservas; // eventos comprados.
 
     public Cliente(String nombre, String correo_electronico, String clave, String teléfono, String dirección, String tarjeta_de_credito, boolean VIP) {
         this.nombre = nombre;
@@ -79,8 +80,14 @@ public class Cliente implements Serializable {
     public ArrayList<Evento> getEventos() {
         return eventos;
     }
-
     
+    public void addReserva(Reserva reserva){
+        reservas.add(reserva);
+    }
+    
+    public ArrayList<Reserva> getReservas(){
+        return reservas;
+    }
 
     @Override
     public String toString() {
