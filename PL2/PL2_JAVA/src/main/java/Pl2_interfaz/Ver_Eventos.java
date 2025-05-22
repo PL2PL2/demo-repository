@@ -109,8 +109,8 @@ public class Ver_Eventos extends javax.swing.JFrame {
      */
     private void cargarEventosEnPanel() {
         
-    pl2_java.ManejarDatos.cargarEventos();
-    java.util.ArrayList<pl2_java.Evento> eventos = pl2_java.ManejarDatos.getEventos();
+    ManejarDatos.cargarEventos();
+    ArrayList<Evento> eventos = ManejarDatos.getEventos();
 
     
 

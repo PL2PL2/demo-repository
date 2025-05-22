@@ -3,36 +3,29 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Pl2_interfaz;
-import java.awt.BorderLayout;
+
 import java.awt.Color;
+import static java.awt.Component.CENTER_ALIGNMENT;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
-import pl2_java.Cliente;
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
 import pl2_java.Evento;
 import pl2_java.ManejarDatos;
-import javax.swing.BoxLayout;
-import javax.swing.JTextArea;
-import javax.swing.JPanel;
 
 /**
  *
  * @author Alejandro
  */
-public class Inicio_Usuario extends javax.swing.JFrame {
+public class Consultar_Eventos extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Inicio_Usuario
-     */
-    private Cliente cliente;
     private ArrayList<Evento> eventos;
-    private ArrayList<Cliente> clientes;
-
-    public Inicio_Usuario(Cliente c) {
-        this.cliente = c;
-        ManejarDatos.cargarClientes();
-        clientes = ManejarDatos.getClientes();
+    /**
+     * Creates new form Consultar_Eventos
+     */
+    public Consultar_Eventos() {
         initComponents();
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(20);
         setExtendedState(this.MAXIMIZED_BOTH);
@@ -43,12 +36,8 @@ public class Inicio_Usuario extends javax.swing.JFrame {
         jComboBox1.addItem("Direccion");
         jComboBox1.addItem("Fechas");
         jComboBox1.addItem("Precio");
-
-        cargarEventos();
     }
-    public void cargarEventos(){
 
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,26 +47,16 @@ public class Inicio_Usuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        jLabel1.setText("Buscar eventos:");
-
-        jButton1.setText("Perfil");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         jFormattedTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,6 +90,15 @@ public class Inicio_Usuario extends javax.swing.JFrame {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jLabel1.setText("Buscar eventos:");
+
+        jButton1.setText("...");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -128,8 +116,8 @@ public class Inicio_Usuario extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, Short.MAX_VALUE)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(102, 102, 102)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -141,11 +129,11 @@ public class Inicio_Usuario extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel1)))
-                .addGap(11, 11, 11)
+                        .addComponent(jLabel1))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -153,25 +141,40 @@ public class Inicio_Usuario extends javax.swing.JFrame {
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 77, Short.MAX_VALUE))
+                .addGap(0, 27, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(914, 607));
-        setLocationRelativeTo(null);
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jFormattedTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextField1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        String selected = jComboBox1.getSelectedItem().toString();
+        String busqueda = jFormattedTextField1.getText();
+        if(selected.equals("Tipo") && !busqueda.isEmpty()){
+            mostrarEventosFiltradosPorTipo(busqueda, selected, jPanel2);
+        }else if(selected.equals("Titulo") && !busqueda.isEmpty()){
+            mostrarEventosFiltradosPorTipo(busqueda, selected, jPanel2);
+        }else if(selected.equals("Precio") && !busqueda.isEmpty()){
+            mostrarEventosFiltradosPorTipo(busqueda, selected, jPanel2);
+        }else if(selected.equals("Direccion") && !busqueda.isEmpty()){
+            mostrarEventosFiltradosPorTipo(busqueda, selected, jPanel2);
+        }else if(selected.equals("Fechas") && !busqueda.isEmpty()){
+            mostrarEventosFiltradosPorTipo(busqueda, selected, jPanel2);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Perfil_Usuario perfil = new Perfil_Usuario(cliente);
-        
+        Inicio_Admin inAd = new Inicio_Admin();
+
         this.dispose();
-        perfil.setVisible(true);
-        
-        
+        inAd.setVisible(true);
+
     }//GEN-LAST:event_jButton1ActionPerformed
     private void mostrarEventosFiltradosPorTipo(String criterio, String campo, JPanel panelDestino) {
         ManejarDatos.cargarEventos();
@@ -219,59 +222,40 @@ public class Inicio_Usuario extends javax.swing.JFrame {
         panelDestino.revalidate();
         panelDestino.repaint();
     }
-
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        String selected = jComboBox1.getSelectedItem().toString();
-        String busqueda = jFormattedTextField1.getText();
-        if(selected.equals("Tipo") && !busqueda.isEmpty()){
-            mostrarEventosFiltradosPorTipo(busqueda, selected, jPanel2);
-        }else if(selected.equals("Titulo") && !busqueda.isEmpty()){
-            mostrarEventosFiltradosPorTipo(busqueda, selected, jPanel2);
-        }else if(selected.equals("Precio") && !busqueda.isEmpty()){
-            mostrarEventosFiltradosPorTipo(busqueda, selected, jPanel2);
-        }else if(selected.equals("Direccion") && !busqueda.isEmpty()){
-            mostrarEventosFiltradosPorTipo(busqueda, selected, jPanel2);
-        }else if(selected.equals("Fechas") && !busqueda.isEmpty()){
-            mostrarEventosFiltradosPorTipo(busqueda, selected, jPanel2);
-        }           
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     /**
      * @param args the command line arguments
      */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(Inicio_Usuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(Inicio_Usuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(Inicio_Usuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(Inicio_Usuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new Inicio_Usuario().setVisible(true);
-//            }
-//        });
-//    }
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Consultar_Eventos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Consultar_Eventos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Consultar_Eventos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Consultar_Eventos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Consultar_Eventos().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -284,4 +268,3 @@ public class Inicio_Usuario extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
-
