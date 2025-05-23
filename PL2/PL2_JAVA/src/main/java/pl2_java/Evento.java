@@ -23,7 +23,7 @@ private String portada; //(imagen del evento).
 private ArrayList<Double> calificaciones; //(media de las reseñas sobre 5)
 private ImageIcon imagen;
 
-    public Evento(String titulo, String tipo, String direccion, ArrayList<String> fechas, Double precio, String portada) {
+    public Evento(String titulo, String tipo, String direccion, ArrayList<String> fechas, Double precio, String portada, ArrayList<Double> calificaciones) {
         this.titulo = titulo;
         this.tipo = tipo;
         this.direccion = direccion;
@@ -31,7 +31,7 @@ private ImageIcon imagen;
         this.precio = precio;
         this.portada = portada;
         this.imagen = cargarImagen(portada);
-        this.calificaciones = new ArrayList<>();
+        this.calificaciones = calificaciones;
     }
     
     private ImageIcon cargarImagen(String rutaRelativa) {

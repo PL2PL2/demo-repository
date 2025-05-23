@@ -19,6 +19,7 @@ public class Añadir_Evento extends javax.swing.JFrame {
 private String rutaPortada;
 private ArrayList<Evento> eventos;
 private ArrayList<String> fechas;
+private ArrayList<Double> calificaciones;
 
 
     /**
@@ -27,6 +28,7 @@ private ArrayList<String> fechas;
     public Añadir_Evento() {
         fechas = new ArrayList<>();
         eventos = new ArrayList<>();
+        calificaciones= new ArrayList<>();
         initComponents();
     }
 
@@ -298,7 +300,7 @@ private ArrayList<String> fechas;
                                !fechas.isEmpty()) && rutaPortada!=null;
         boolean TituloCoincide= false;
         boolean IncongruenciaEspacioTemporal= false;
-        Evento eventoNuevo = new Evento(Titulo,Tipo,Direccion,fechas,Precio,rutaPortada);
+        Evento eventoNuevo = new Evento(Titulo,Tipo,Direccion,fechas,Precio,rutaPortada,calificaciones);
         
         if(camposCompletos){
             System.out.println(fechas);

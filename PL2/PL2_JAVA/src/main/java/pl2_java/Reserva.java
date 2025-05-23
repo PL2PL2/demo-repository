@@ -14,10 +14,12 @@ public class Reserva implements Serializable{
     private Cliente cliente;
     private Evento evento;
     private String fecha;
+    private Double notaIndividual;
     public Reserva(Cliente cl, Evento ev, String fecha){
         this.cliente = cl;
         this.evento = ev;
         this.fecha= fecha;
+        this.notaIndividual=null;
     }
 
 
@@ -44,7 +46,14 @@ public class Reserva implements Serializable{
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
-    
+
+    public Double getNotaIndividual() {
+        return notaIndividual;
+    }
+
+    public void setNotaIndividual(Double notaIndividual) {
+        this.notaIndividual = notaIndividual;
+    }
     
         @Override
     public String toString() {

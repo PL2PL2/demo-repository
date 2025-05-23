@@ -197,6 +197,12 @@ public class Inicio_Usuario extends javax.swing.JFrame {
             })
             .forEach(ev -> {
                 Evento_Panel panel = new Evento_Panel(ev, cliente, this);
+                panel.getLabel2().setVisible(false);
+                panel.getLabel2().setEnabled(false);
+                panel.getSlider1().setVisible(false);
+                panel.getSlider1().setEnabled(false);
+                panel.getBoton2().setVisible(false);
+                panel.getBoton2().setEnabled(false);
                 panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 300));
                 panel.setAlignmentX(CENTER_ALIGNMENT);
                 panel.setBorder(BorderFactory.createCompoundBorder(
@@ -208,14 +214,15 @@ public class Inicio_Usuario extends javax.swing.JFrame {
                                "\nTipo: " + ev.getTipo() +
                                "\nDirección: " + ev.getDireccion() +
                                "\nFechas: " + ev.getFechas() +
-                               "\nPrecio: " + ev.getPrecio();
+                               "\nPrecio: " + ev.getPrecio() +
+                               "\nCalificación: " + ev.getCalificacionMedia();
                 panel.setTexto(texto);
                 panel.setImagenEvento(ev.getImagen());
 
                 panelDestino.add(panel);
                 panelDestino.add(Box.createRigidArea(new Dimension(0, 10)));
             });
-
+        
         panelDestino.revalidate();
         panelDestino.repaint();
     }
