@@ -190,6 +190,7 @@ public class Login_User extends javax.swing.JFrame {
         String password = new String(jPasswordField1.getPassword());
         boolean existe = false;
         boolean contraseña = false;
+        
         if(user.matches(".+@.+\\..+")){
           try{
             for(Cliente c:clientes){
@@ -209,6 +210,17 @@ public class Login_User extends javax.swing.JFrame {
             catch (Exception e){
                 e.printStackTrace();
             }
+            ManejarDatos.cargarReservas(); // Esto carga TODAS las reservas en memoria
+            ArrayList<Reserva> todasLasReservas = ManejarDatos.getReservas();
+            ArrayList<Reserva> misReservas = new ArrayList<>();
+
+            for (Reserva r : todasLasReservas) {
+                if (r.getCliente().getCorreo_electronico().equals(clientillo.getCorreo_electronico())) {
+                    misReservas.add(r);
+                }
+            }
+
+            clientillo.setReservas(misReservas);
             if(existe && contraseña){
                 cargando msg = new cargando("Cargando...", "Esperando al servidor", 1000);
                 Inicio_Usuario inicio = new Inicio_Usuario(clientillo);

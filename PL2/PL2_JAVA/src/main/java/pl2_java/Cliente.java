@@ -30,6 +30,7 @@ public class Cliente implements Serializable {
         this.tarjeta_de_credito = tarjeta_de_credito;
         this.VIP = VIP;
         this.eventos = new ArrayList<>();
+        this.reservas = new ArrayList<>();
         
     }
 
@@ -74,7 +75,10 @@ public class Cliente implements Serializable {
         }
         return "false";
     }
-
+    
+    public void setReservas(ArrayList<Reserva> res){
+        this.reservas = res;
+    }
     
 
     public ArrayList<Evento> getEventos() {

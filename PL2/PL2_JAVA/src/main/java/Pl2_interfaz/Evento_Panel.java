@@ -10,11 +10,16 @@ import javax.swing.ImageIcon;
 import java.awt.Image;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
+import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 import pl2_java.Cliente;
 import pl2_java.Evento;
 import pl2_java.ManejarDatos;
 import pl2_java.Reserva;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+
 
 
 /**
@@ -30,21 +35,29 @@ public class Evento_Panel extends javax.swing.JPanel {
     private Cliente cliente;
     private ArrayList<Reserva> reservas;
     private String fechaSeleccionada;
-    public Evento_Panel(Evento ev, Cliente cl) {
+    private int cont;
+    private JFrame parentFrame;
+    public Evento_Panel(Evento ev, Cliente cl, JFrame frame) {
         this.evento = ev;
         this.cliente = cl;
+        this.parentFrame = frame;
         ManejarDatos.cargarReservas();
         reservas = ManejarDatos.getReservas();
         this.setPreferredSize(new Dimension(600, 400));
         this.setMaximumSize(new Dimension(Integer.MAX_VALUE, 120)); // evita que crezca verticalmente
         initComponents();
-        for(Reserva r : reservas){
-            if(r.getCliente().getCorreo_electronico().equals(cliente.getCorreo_electronico()) && r.getEvento().getTitulo().equals(evento.getTitulo())){
-                jButton1.setText("RESERVADO");
-                jButton1.setEnabled(false);
-                break;
-            }
-        }
+//        this.cont = 0;
+//        for(Reserva r : reservas){
+//            if(r.getCliente().getCorreo_electronico().equals(cliente.getCorreo_electronico()) && r.getEvento().getTitulo().equals(evento.getTitulo()) && ev.getFechas().contains( r.getFecha() )){
+//                jButton1.setText("RESERVADO");
+//                jButton1.setEnabled(false);
+//                jComboBox1.removeAllItems();
+//                jComboBox1.addItem(r.getFecha());
+//                jComboBox1.setEnabled(false);
+//                break;
+//                }
+//            }
+        
         jLabel1.setPreferredSize(new Dimension(200, 200)); // tamaño fijo: ancho = 200px, alto = 150px
         jLabel1.setText("");
         jTextArea2.addMouseWheelListener(e -> {
@@ -156,21 +169,45 @@ public class Evento_Panel extends javax.swing.JPanel {
 
         add(jPanel1);
     }// </editor-fold>//GEN-END:initComponents
-
+    public JComboBox getComboBox(){
+        return jComboBox1;
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         System.out.println(evento);
         System.out.println(cliente);
         ManejarDatos.cargarReservas();
         reservas = ManejarDatos.getReservas();
-        Reserva nueva = new Reserva(cliente, evento, fechaSeleccionada);
-        reservas.add(nueva);
-        ManejarDatos.guardarReservas();
-        jButton1.setText("RESERVADO");
-        jButton1.setEnabled(false);
+        String fecha1 = jComboBox1.getSelectedItem().toString();
+        Reserva nueva = new Reserva(cliente, evento, fecha1);
+        boolean yaReservado = false;
+        for (Reserva r : cliente.getReservas()) {
+            if (r.getEvento().getTitulo().equals(nueva.getEvento().getTitulo())
+                    && r.getFecha().equals(nueva.getFecha())) {
+                yaReservado = true;
+                break;
+            }
+        }
+
+        if (yaReservado) {
+            JOptionPane.showMessageDialog(parentFrame, "Reserva ya realizada", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            cliente.addReserva(nueva);
+            reservas.add(nueva);
+            ManejarDatos.guardarReservas();
+        }
+
+    
+        
+//        jButton1.setText("RESERVADO");
+//        jButton1.setEnabled(false);
+//        String fecha = jComboBox1.getSelectedItem().toString();
+//        jComboBox1.removeAllItems();
+//        jComboBox1.addItem(fecha);
+//        jComboBox1.setEnabled(false);
         System.out.println(reservas);
     }//GEN-LAST:event_jButton1ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

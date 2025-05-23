@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JComboBox;
 import pl2_java.Cliente;
 import pl2_java.Evento;
 import pl2_java.ManejarDatos;
@@ -39,7 +40,10 @@ public class Ver_Entradas extends javax.swing.JFrame {
         for (Reserva r : reservas) {
             if (r.getCliente().getCorreo_electronico().equals(cliente.getCorreo_electronico())) {
                 ev = r.getEvento();
-                Evento_Panel panel = new Evento_Panel(ev, cliente);
+                Evento_Panel panel = new Evento_Panel(ev, cliente, this);
+                panel.remove(panel.getComboBox());
+                panel.revalidate();
+                panel.repaint();
                 panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 300));
                 panel.setAlignmentX(CENTER_ALIGNMENT);
                 panel.setBorder(BorderFactory.createCompoundBorder(

@@ -203,7 +203,7 @@ public class Consultar_Eventos extends javax.swing.JFrame {
                 }
             })
             .forEach(ev -> {
-                Evento_Panel panel = new Evento_Panel(ev, cliente);
+                Evento_Panel panel = new Evento_Panel(ev, cliente, this);
                 panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 300));
                 panel.setAlignmentX(CENTER_ALIGNMENT);
                 panel.setBorder(BorderFactory.createCompoundBorder(
