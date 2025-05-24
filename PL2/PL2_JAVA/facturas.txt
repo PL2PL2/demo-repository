@@ -14,3 +14,11 @@ Fecha: 2025-05-24 11:33:40
 Importe: 90.0
 Evento: Evento{titulo=Peru, tipo=Peruano, direccion=Peru, fechas=[10/10/28-19:00], precio=90.0, portada=360_F_243259090_crbVsAqKF3PC2jk2eKiUwZHBPH8Q6y9Y.jpg, calificacion=0.0}
 Cliente: Cliente{nombre=as, correo_electronico=pepe@gmail.com, clave=1234, teléfono=123-42-34-23, dirección=sa, tarjeta_de_credito=32433, VIP=true, eventos=[]}
+Fecha: 2025-05-24 22:3:53
+Importe: 38.0
+Evento: Evento{titulo=Baile, tipo=Si, direccion=No, fechas=[20/10/27-19:00], precio=38.0, portada=Playa.jpg, calificacion=3.67}
+Cliente: Cliente{nombre=f, correo_electronico=f@f.f, clave=f, teléfono=111-11-11-11, dirección=f, tarjeta_de_credito=f, VIP=true, eventos=[]}
+Fecha: 2025-05-24 22:17:45
+Importe: 90.0
+Evento: Evento{titulo=Prueba, tipo=1, direccion=1, fechas=[11/11/29-11:11], precio=100.0, portada=MJ-The-Michael-Jackson-Musical-on-Broadway-Tickets-MJ-and-Cast.jpg, calificacion=0.0}
+Cliente: Cliente{nombre=Juan, correo_electronico=j@j.j, clave=j, teléfono=111-11-11-11, dirección=j, tarjeta_de_credito=j, VIP=true, eventos=[]}

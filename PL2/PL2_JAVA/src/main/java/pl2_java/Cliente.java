@@ -75,6 +75,14 @@ public class Cliente implements Serializable {
         }
         return "false";
     }
+    public void setVip(boolean vip){
+        if(vip==true){
+            this.VIP=true;
+        }
+        else if(vip==false){
+            this.VIP=false;
+        }
+    }
     
     public void setReservas(ArrayList<Reserva> res){
         this.reservas = res;

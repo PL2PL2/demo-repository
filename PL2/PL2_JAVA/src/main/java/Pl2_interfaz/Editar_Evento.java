@@ -291,7 +291,7 @@ public class Editar_Evento extends javax.swing.JFrame {
                 
                 ArrayList<Evento> eventos = ManejarDatos.getEventos();
                 for (int i = 0; i < eventos.size(); i++) {
-                    if (eventos.get(i).equals(eveSel)) {
+                    if (eventos.get(i).getTitulo().equals(eveSel.getTitulo())) {
                         eveSel.setTitulo(Titulo);
                     eveSel.setFechas(fechasActual);
                     eveSel.setPrecio(Precio);

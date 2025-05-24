@@ -36,9 +36,25 @@ public class Ver_Eventos extends javax.swing.JFrame {
         
         initComponents();
         this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
-        cargarEventosEnPanel();
+        ManejarDatos.cargarEventos();
+    ArrayList<Evento> eventos = ManejarDatos.getEventos();
 
+    
+
+    if (eventos == null || eventos.isEmpty()) {
+        panelEventos.add(new javax.swing.JLabel("No hay eventos disponibles."));
+    } else {
+        for (Evento e : eventos) {
+    // Panel contenedor para el evento:
+    AdminEvento_Panel panelEvento = new AdminEvento_Panel(e,this);
+   panelEventos.add(panelEvento);
+   panelEventos.add(Box.createRigidArea(new Dimension(0, 20)));
+        }
+      }
     }
+       
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -76,13 +92,13 @@ public class Ver_Eventos extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                .addComponent(scrollEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                .addComponent(scrollEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(110, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrollEventos, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+            .addComponent(scrollEventos, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jButton1)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -107,117 +123,10 @@ public class Ver_Eventos extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    private void cargarEventosEnPanel() {
+    
         
-    ManejarDatos.cargarEventos();
-    ArrayList<Evento> eventos = ManejarDatos.getEventos();
-
-    
-
-    if (eventos == null || eventos.isEmpty()) {
-        panelEventos.add(new javax.swing.JLabel("No hay eventos disponibles."));
-    } else {
-        for (Evento e : eventos) {
-    // Panel contenedor para el evento:
-    JPanel panelEvento = new JPanel();
-    panelEvento.setLayout(new BorderLayout());
-    panelEvento.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
-    panelEvento.setMaximumSize(new Dimension(Integer.MAX_VALUE, 200)); // Altura fija
-
-    // Imagen de portada:
-    ImageIcon icono = e.getImagen();
-    JLabel etiquetaImagen = new JLabel("");
-    if (icono != null) {
-        Image imagenEscalada = icono.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
-         etiquetaImagen = new JLabel(new ImageIcon(imagenEscalada));
-        etiquetaImagen.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        panelEvento.add(etiquetaImagen, BorderLayout.WEST);
-    } else {
-         etiquetaImagen = new JLabel("Sin imagen");
-        etiquetaImagen.setPreferredSize(new Dimension(120, 120));
-        etiquetaImagen.setHorizontalAlignment(JLabel.CENTER);
-        etiquetaImagen.setVerticalAlignment(JLabel.CENTER);
-        etiquetaImagen.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
-        panelEvento.add(etiquetaImagen, BorderLayout.WEST);
-}
-
-
-    
-    JTextArea texto = new JTextArea();
-    texto.setText("Título: " + e.getTitulo() + "\nTipo: " + e.getTipo() + "\nDirección: " + e.getDireccion()+ "\nFechas: " + e.getFechas() + "\nPrecio: " + e.getPrecio() + "€" );
-    texto.setEditable(false);
-    texto.setLineWrap(true);
-    texto.setWrapStyleWord(true);
-    texto.setOpaque(false);
-    texto.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
-    JPanel panelBotones = new JPanel();
-        //Botón editar
-    JButton btnEditar = new JButton("Editar");
-    btnEditar.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent evt) {
-            // Falta hacer toda la logica...
-            System.out.println("Editar: " + e.getTitulo());
-            editarEvento(e);
-            
-            
-            
-            
-            
-        }
-    });
-
-    // Botón Eliminar
-    JButton btnEliminar = new JButton("Eliminar");
-    btnEliminar.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent evt) {
-            //Falta hacer toda la logica...
-            System.out.println("Eliminar: " + e.getTitulo());
-            eliminarEvento(e);
-        }
-    });
-
-    // Añadir botones al subpanel
-    panelBotones.add(btnEditar);
-    panelBotones.add(btnEliminar);
-    
-    
-    panelEvento.add(etiquetaImagen, BorderLayout.WEST);
-    panelEvento.add(texto, BorderLayout.CENTER);
-
-    panelEvento.add(panelBotones, BorderLayout.SOUTH);
-    
-    panelEventos.add(panelEvento);
-    panelEventos.add(Box.createRigidArea(new Dimension(0, 10))); // Separación entre eventos
-}
-    }
-
-    
-}
-    
-    private void eliminarEvento(Evento evento) {
-    int confirm = JOptionPane.showConfirmDialog(this, "¿Estás seguro de eliminar este evento?",
-                                                "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
-    if (confirm == JOptionPane.YES_OPTION) {
-        ArrayList<Evento> eventos = ManejarDatos.getEventos();
-        eventos.remove(evento);
-        ManejarDatos.setEventos(eventos);
-        ManejarDatos.guardarEventos();
-
-        JOptionPane.showMessageDialog(this, "Evento eliminado exitosamente.");
-        // Recargar vista
         
-        this.dispose();
-        new Ver_Eventos().setVisible(true);
-    }
-   
-  }
-    
-    private void editarEvento(Evento evento) {
-    this.dispose();
-    new Editar_Evento(evento).setVisible(true);  // Crear un JFrame para editar evento
-}
-    
+        
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

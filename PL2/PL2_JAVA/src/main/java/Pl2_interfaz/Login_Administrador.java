@@ -140,7 +140,7 @@ public class Login_Administrador extends javax.swing.JFrame {
             inicio.setVisible(true);
             this.dispose();
         }else{
-            JOptionPane.showMessageDialog(this, "Tú no eres el puto Admin", password, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Tú no eres el Admin", password, JOptionPane.ERROR_MESSAGE);
         } 
     }//GEN-LAST:event_jButton1ActionPerformed
 

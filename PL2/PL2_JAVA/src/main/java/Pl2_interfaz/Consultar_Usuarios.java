@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -31,12 +32,27 @@ public class Consultar_Usuarios extends javax.swing.JFrame {
     /**
      * Creates new form Consultar_Usuarios
      */
+    private ArrayList<Cliente> clientes;
     public Consultar_Usuarios() {
+        ManejarDatos.cargarClientes();
+        clientes=ManejarDatos.getClientes();
+    
         initComponents();
         this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
-        cargarClientesEnPanel();
+        jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
+        jScrollPane1.getVerticalScrollBar().setUnitIncrement(20);
+        for (Cliente c  : clientes) {
+            panelClientes panel= new panelClientes(c);
+            panel.setAlignmentX(CENTER_ALIGNMENT);
+                panel.setBorder(BorderFactory.createCompoundBorder(
+                    BorderFactory.createEmptyBorder(10, 10, 10, 10),
+                    BorderFactory.createLineBorder(Color.GRAY, 1)
+                ));
+                jPanel1.revalidate();
+                jPanel1.repaint();
+            jPanel1.add(panel);
     }
-
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,12 +62,11 @@ public class Consultar_Usuarios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelClientes = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        panelClientes.setLayout(new javax.swing.BoxLayout(panelClientes, javax.swing.BoxLayout.Y_AXIS));
 
         jButton1.setText("...");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -60,24 +75,37 @@ public class Consultar_Usuarios extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 548, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 487, Short.MAX_VALUE)
+        );
+
+        jScrollPane1.setViewportView(jPanel1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 850, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(207, Short.MAX_VALUE)
-                .addComponent(panelClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(panelClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(155, Short.MAX_VALUE))
         );
 
@@ -95,49 +123,9 @@ public class Consultar_Usuarios extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     
-    private void cargarClientesEnPanel() {
-        
-    ManejarDatos.cargarClientes();
-    ArrayList<Cliente> clientes = ManejarDatos.getClientes();
-
-    
-
-    if (clientes == null || clientes.isEmpty()) {
-        panelClientes.add(new javax.swing.JLabel("No hay usuarios disponibles."));
-    } else {
-        for (Cliente c : clientes) {
-    // Panel contenedor para el evento:
-    JPanel panelCliente = new JPanel();
-    panelCliente.setLayout(new BorderLayout());
-    panelCliente.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
-    panelCliente.setMaximumSize(new Dimension(Integer.MAX_VALUE, 100)); // Altura fija
-
-
-
-    
-    JTextArea texto = new JTextArea();
-    texto.setText("Nombre: " + c.getNombre() + "\nCorreo: " + c.getCorreo_electronico());
-    texto.setEditable(false);
-    texto.setLineWrap(true);
-    texto.setWrapStyleWord(true);
-    texto.setOpaque(false);
-    texto.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
-    
-             
-    panelCliente.add(texto, BorderLayout.CENTER);
-
     
     
-    panelClientes.add(panelCliente);
-    panelClientes.add(Box.createRigidArea(new Dimension(0, 10)));
-            
-            
-            
-            
-        }
-    }
-    }
+    
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -173,6 +161,7 @@ public class Consultar_Usuarios extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JPanel panelClientes;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

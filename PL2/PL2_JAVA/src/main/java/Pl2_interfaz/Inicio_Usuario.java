@@ -177,7 +177,7 @@ public class Inicio_Usuario extends javax.swing.JFrame {
         ManejarDatos.cargarEventos();
         eventos = ManejarDatos.getEventos();
         panelDestino.removeAll();
-
+        
         eventos.stream()
             .filter(ev -> {
                 switch (campo) {
@@ -190,7 +190,10 @@ public class Inicio_Usuario extends javax.swing.JFrame {
                     case "Fechas":
                         return ev.getFechas().contains(criterio);
                     case "Precio":
-                        return ev.getPrecio().toString().contains(criterio);
+                        if(cliente.isVIP()==true){
+                            return ev.getPrecio().toString().contains(criterio);}
+                        else{
+                            return ev.getPrecio().toString().contains(criterio);}
                     default:
                         return false;
                 }
@@ -209,12 +212,18 @@ public class Inicio_Usuario extends javax.swing.JFrame {
                     BorderFactory.createEmptyBorder(10, 10, 10, 10),
                     BorderFactory.createLineBorder(Color.GRAY, 1)
                 ));
-
+                double PrecioReal=0;
+                    if(cliente.isVIP()==true){
+                PrecioReal=0.9*ev.getPrecio();
+            }
+            else{
+                PrecioReal=ev.getPrecio();
+        }
                 String texto = "Título: " + ev.getTitulo() +
                                "\nTipo: " + ev.getTipo() +
                                "\nDirección: " + ev.getDireccion() +
                                "\nFechas: " + ev.getFechas() +
-                               "\nPrecio: " + ev.getPrecio() +
+                               "\nPrecio: " + PrecioReal +
                                "\nCalificación: " + ev.getCalificacionMedia();
                 panel.setTexto(texto);
                 panel.setImagenEvento(ev.getImagen());

@@ -44,10 +44,18 @@ public class Evento_Panel extends javax.swing.JPanel {
     private int cont;
     private JFrame parentFrame;
     private ArrayList<Evento> eventos;
+    private double PrecioReal; 
     public Evento_Panel(Evento ev, Cliente cl, JFrame frame) {
         this.evento = ev;
         this.cliente = cl;
         this.parentFrame = frame;
+        if(cl.isVIP()==true){
+            PrecioReal=0.9*evento.getPrecio();
+        }
+        else{
+            PrecioReal=evento.getPrecio();
+        }
+        
         ManejarDatos.cargarReservas();
         reservas = ManejarDatos.getReservas();
         ManejarDatos.cargarEventos();
@@ -205,7 +213,7 @@ public class Evento_Panel extends javax.swing.JPanel {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton2)))))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         add(jPanel1);
@@ -216,7 +224,7 @@ public class Evento_Panel extends javax.swing.JPanel {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int confirm = JOptionPane.showConfirmDialog(this, "¿Confirmas la compra de la entrada?" + "\nTitulo: " +  evento.getTitulo() + "\nFecha " + jComboBox1.getSelectedItem().toString() + "\nCoste " + evento.getPrecio(),
+        int confirm = JOptionPane.showConfirmDialog(this, "¿Confirmas la compra de la entrada?" + "\nTitulo: " +  evento.getTitulo() + "\nFecha " + jComboBox1.getSelectedItem().toString() + "\nCoste " + PrecioReal,
                                                 "Confirmar compra", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
         
@@ -252,7 +260,7 @@ public class Evento_Panel extends javax.swing.JPanel {
             int segundo = fechaHora.getSecond();
 
             
-            String contenido = "Fecha: " + fechaFactura.toString() + " " + hora + ":" + minuto + ":" + segundo + "\nImporte: " + evento.getPrecio().toString()
+            String contenido = "Fecha: " + fechaFactura.toString() + " " + hora + ":" + minuto + ":" + segundo + "\nImporte: " + String.valueOf(PrecioReal)
                     + "\nEvento: " + evento + "\nCliente: " + cliente;
 
             try (BufferedWriter escritor = new BufferedWriter(new FileWriter(nombreArchivo, true))) {

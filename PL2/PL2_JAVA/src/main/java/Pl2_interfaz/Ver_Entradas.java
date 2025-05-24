@@ -38,8 +38,16 @@ public class Ver_Entradas extends javax.swing.JFrame {
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(20);
         //setExtendedState(this.MAXIMIZED_BOTH);
         for (Reserva r : reservas) {
+            ev = r.getEvento();
             if (r.getCliente().getCorreo_electronico().equals(cliente.getCorreo_electronico())) {
-                ev = r.getEvento();
+                double PrecioReal=0;
+            if(cliente.isVIP()==true){
+                PrecioReal=0.9*ev.getPrecio();
+            }
+            else{
+                PrecioReal=ev.getPrecio();
+            }
+                
                 Evento_Panel panel = new Evento_Panel(ev, cliente, this);
                 panel.getComboBox().setVisible(false); // Oculta comboBox
                 panel.getComboBox().setEnabled(false); // Desactiva comboBox
@@ -58,7 +66,7 @@ public class Ver_Entradas extends javax.swing.JFrame {
                                "\nTipo: " + ev.getTipo() +
                                "\nDirección: " + ev.getDireccion() +
                                "\nFecha elegida: " + r.getFecha() +
-                               "\nPrecio: " + ev.getPrecio()+
+                               "\nPrecio: " + PrecioReal+
                                "\nCalificación: " + ev.getCalificacionMedia();
                                 
                 panel.setTexto(texto);
