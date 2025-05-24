@@ -1,0 +1,16 @@
+Fecha: 2025-05-24 11:33:28
+Importe: 30.0
+Evento: Evento{titulo=Baile, tipo=Si, direccion=No, fechas=[20/10/27-19:00], precio=30.0, portada=Playa.jpg, calificacion=3.67}
+Cliente: Cliente{nombre=as, correo_electronico=pepe@gmail.com, clave=1234, teléfono=123-42-34-23, dirección=sa, tarjeta_de_credito=32433, VIP=true, eventos=[]}
+Fecha: 2025-05-24 11:33:30
+Importe: 30.0
+Evento: Evento{titulo=Playita, tipo=Turismo, direccion=Benidorm, fechas=[13/06/27-15:00, 15/06/27-15:00], precio=30.0, portada=Playa.jpg, calificacion=4.5}
+Cliente: Cliente{nombre=as, correo_electronico=pepe@gmail.com, clave=1234, teléfono=123-42-34-23, dirección=sa, tarjeta_de_credito=32433, VIP=true, eventos=[]}
+Fecha: 2025-05-24 11:33:32
+Importe: 30.0
+Evento: Evento{titulo=Playita, tipo=Turismo, direccion=Benidorm, fechas=[13/06/27-15:00, 15/06/27-15:00], precio=30.0, portada=Playa.jpg, calificacion=4.5}
+Cliente: Cliente{nombre=as, correo_electronico=pepe@gmail.com, clave=1234, teléfono=123-42-34-23, dirección=sa, tarjeta_de_credito=32433, VIP=true, eventos=[]}
+Fecha: 2025-05-24 11:33:40
+Importe: 90.0
+Evento: Evento{titulo=Peru, tipo=Peruano, direccion=Peru, fechas=[10/10/28-19:00], precio=90.0, portada=360_F_243259090_crbVsAqKF3PC2jk2eKiUwZHBPH8Q6y9Y.jpg, calificacion=0.0}
+Cliente: Cliente{nombre=as, correo_electronico=pepe@gmail.com, clave=1234, teléfono=123-42-34-23, dirección=sa, tarjeta_de_credito=32433, VIP=true, eventos=[]}

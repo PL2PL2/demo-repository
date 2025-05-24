@@ -4,6 +4,10 @@
  */
 package Pl2_interfaz;
 
+import java.util.ArrayList;
+import pl2_java.ManejarDatos;
+import pl2_java.Reserva;
+
 /**
  *
  * @author daniel
@@ -13,6 +17,7 @@ public class Inicio_Admin extends javax.swing.JFrame {
     /**
      * Creates new form Inicio_Admin
      */
+    private ArrayList<Reserva> reservas;
     public Inicio_Admin() {
         initComponents();
     }
@@ -56,6 +61,11 @@ public class Inicio_Admin extends javax.swing.JFrame {
         });
 
         jButton4.setText("Consultar Reservas");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("CERRAR SESIÓN");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -132,6 +142,13 @@ public class Inicio_Admin extends javax.swing.JFrame {
         this.dispose();
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        Consultar_Reservas consultar = new Consultar_Reservas();
+        consultar.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -21,7 +21,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JSlider;
-
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
 
 
 
@@ -239,8 +242,31 @@ public class Evento_Panel extends javax.swing.JPanel {
             cliente.addReserva(nueva);
             reservas.add(nueva);
             ManejarDatos.guardarReservas();
-        }
-        }
+            
+            String nombreArchivo = "facturas.txt";
+            LocalDate fechaFactura = LocalDate.now();
+            LocalDateTime fechaHora = LocalDateTime.now();
+
+            int hora = fechaHora.getHour();
+            int minuto = fechaHora.getMinute();
+            int segundo = fechaHora.getSecond();
+
+            
+            String contenido = "Fecha: " + fechaFactura.toString() + " " + hora + ":" + minuto + ":" + segundo + "\nImporte: " + evento.getPrecio().toString()
+                    + "\nEvento: " + evento + "\nCliente: " + cliente;
+
+            try (BufferedWriter escritor = new BufferedWriter(new FileWriter(nombreArchivo, true))) {
+                escritor.write(contenido);
+                escritor.newLine();
+                System.out.println("El archivo se ha escrito correctamente.");
+            } catch (IOException e) {
+                System.err.println("Ocurrió un error al escribir en el archivo: " + e.getMessage());
+            }
+    }
+}
+
+        
+        
 
     
         
