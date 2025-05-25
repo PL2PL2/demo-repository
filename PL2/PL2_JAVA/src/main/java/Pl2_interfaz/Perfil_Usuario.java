@@ -7,6 +7,7 @@ package Pl2_interfaz;
 import pl2_java.Cliente;
 import pl2_java.ManejarDatos;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Alejandro
@@ -252,13 +253,19 @@ public class Perfil_Usuario extends javax.swing.JFrame {
                 vip = false;
             }
             String telefono = jFormattedTextField5.getText();
-            clientes.remove(index);
             Cliente cambiado = new Cliente(nombre, correo, cliente.getClave(), telefono, direccion, cliente.getTarjeta_de_credito(), vip);
+            int confirm = JOptionPane.showConfirmDialog(this, "¿Confirmas el cambio de los datos?" + "\nNombre: " +  cambiado.getNombre() + "\nCorreo " + cambiado.getCorreo_electronico() + 
+                    "\ndireccion " + cambiado.getDirección() + "\ntelefono: " + cambiado.getTeléfono(),
+                                                "Confirmar compra", JOptionPane.YES_NO_OPTION);
+            
+            if(confirm == JOptionPane.YES_OPTION){
+            clientes.remove(index);
             clientes.add(cambiado);
             ManejarDatos.guardarClientes();
             Login_User login = new Login_User();
             login.setVisible(true);
             this.dispose();
+            }
         }
         
         

@@ -7,6 +7,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
+import java.util.stream.Stream;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import pl2_java.Cliente;
@@ -43,7 +44,8 @@ public class Inicio_Usuario extends javax.swing.JFrame {
         jComboBox1.addItem("Direccion");
         jComboBox1.addItem("Fechas");
         jComboBox1.addItem("Precio");
-
+        jComboBox1.addItem("");
+        jLabel4.setText("");
         cargarEventos();
     }
     public void cargarEventos(){
@@ -66,6 +68,8 @@ public class Inicio_Usuario extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -111,6 +115,10 @@ public class Inicio_Usuario extends javax.swing.JFrame {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jLabel3.setText("Resultados encontrados:");
+
+        jLabel4.setText("jLabel4");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -123,7 +131,7 @@ public class Inicio_Usuario extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap(76, Short.MAX_VALUE)
+                                .addContainerGap(65, Short.MAX_VALUE)
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
                                 .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -131,11 +139,18 @@ public class Inicio_Usuario extends javax.swing.JFrame {
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, Short.MAX_VALUE)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(102, 102, 102)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(157, 157, 157)
-                        .addComponent(jButton2)))
-                .addContainerGap(100, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(102, 102, 102)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(157, 157, 157)
+                                .addComponent(jButton2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(198, 198, 198)
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel4)))))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,7 +159,10 @@ public class Inicio_Usuario extends javax.swing.JFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel1)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))))
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -153,7 +171,7 @@ public class Inicio_Usuario extends javax.swing.JFrame {
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 77, Short.MAX_VALUE))
+                .addGap(0, 46, Short.MAX_VALUE))
         );
 
         setSize(new java.awt.Dimension(914, 607));
@@ -173,12 +191,18 @@ public class Inicio_Usuario extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
+    int cont = 0;
     private void mostrarEventosFiltradosPorTipo(String criterio, String campo, JPanel panelDestino) {
         ManejarDatos.cargarEventos();
         eventos = ManejarDatos.getEventos();
         panelDestino.removeAll();
+        cont = 0;
         
-        eventos.stream()
+        Stream<Evento> eventosFiltrados;
+        if(criterio.isEmpty() || campo.isEmpty()){
+            eventosFiltrados = eventos.stream();
+        }else{
+        eventosFiltrados = eventos.stream()
             .filter(ev -> {
                 switch (campo) {
                     case "Tipo":
@@ -197,8 +221,9 @@ public class Inicio_Usuario extends javax.swing.JFrame {
                     default:
                         return false;
                 }
-            })
-            .forEach(ev -> {
+            });
+        }
+            eventosFiltrados.forEach(ev -> {
                 Evento_Panel panel = new Evento_Panel(ev, cliente, this);
                 panel.getLabel2().setVisible(false);
                 panel.getLabel2().setEnabled(false);
@@ -211,7 +236,9 @@ public class Inicio_Usuario extends javax.swing.JFrame {
                 panel.setBorder(BorderFactory.createCompoundBorder(
                     BorderFactory.createEmptyBorder(10, 10, 10, 10),
                     BorderFactory.createLineBorder(Color.GRAY, 1)
+                        
                 ));
+                cont++;
                 double PrecioReal=0;
                     if(cliente.isVIP()==true){
                 PrecioReal=0.9*ev.getPrecio();
@@ -241,17 +268,9 @@ public class Inicio_Usuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         String selected = jComboBox1.getSelectedItem().toString();
         String busqueda = jFormattedTextField1.getText();
-        if(selected.equals("Tipo") && !busqueda.isEmpty()){
-            mostrarEventosFiltradosPorTipo(busqueda, selected, jPanel2);
-        }else if(selected.equals("Titulo") && !busqueda.isEmpty()){
-            mostrarEventosFiltradosPorTipo(busqueda, selected, jPanel2);
-        }else if(selected.equals("Precio") && !busqueda.isEmpty()){
-            mostrarEventosFiltradosPorTipo(busqueda, selected, jPanel2);
-        }else if(selected.equals("Direccion") && !busqueda.isEmpty()){
-            mostrarEventosFiltradosPorTipo(busqueda, selected, jPanel2);
-        }else if(selected.equals("Fechas") && !busqueda.isEmpty()){
-            mostrarEventosFiltradosPorTipo(busqueda, selected, jPanel2);
-        }           
+        mostrarEventosFiltradosPorTipo(busqueda, selected, jPanel2);
+        jLabel4.setText(String.valueOf(cont));
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -296,6 +315,8 @@ public class Inicio_Usuario extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
