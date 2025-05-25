@@ -6,6 +6,8 @@ package Pl2_interfaz;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 import javax.swing.BorderFactory;
@@ -35,6 +37,8 @@ public class Inicio_Usuario extends javax.swing.JFrame {
         ManejarDatos.cargarClientes();
         clientes = ManejarDatos.getClientes();
         initComponents();
+        Image icono = Toolkit.getDefaultToolkit().getImage("Icono/IconoBien.png");
+        setIconImage(icono);
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(20);
         setExtendedState(this.MAXIMIZED_BOTH);
         jPanel2.setLayout(new BoxLayout(jPanel2, BoxLayout.Y_AXIS));
@@ -72,6 +76,7 @@ public class Inicio_Usuario extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("JavaEvents");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel1.setText("Buscar eventos:");

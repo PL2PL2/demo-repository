@@ -4,6 +4,8 @@
  */
 package Pl2_interfaz;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
@@ -30,6 +32,8 @@ private ArrayList<Double> calificaciones;
         eventos = new ArrayList<>();
         calificaciones= new ArrayList<>();
         initComponents();
+        Image icono = Toolkit.getDefaultToolkit().getImage("Icono/IconoBien.png");
+        setIconImage(icono);
     }
 
     /**
@@ -64,6 +68,7 @@ private ArrayList<Double> calificaciones;
         jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("JavaEvents");
 
         jLabel1.setText("AÑADIR EVENTO");
 

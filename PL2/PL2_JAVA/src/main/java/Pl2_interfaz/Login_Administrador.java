@@ -4,6 +4,8 @@
  */
 package Pl2_interfaz;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 
@@ -18,6 +20,8 @@ public class Login_Administrador extends javax.swing.JFrame {
      */
     public Login_Administrador() {
         initComponents();
+        Image icono = Toolkit.getDefaultToolkit().getImage("Icono/IconoBien.png");
+        setIconImage(icono);
     }
 
     /**

@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -38,6 +39,8 @@ public class Consultar_Usuarios extends javax.swing.JFrame {
         clientes=ManejarDatos.getClientes();
     
         initComponents();
+        Image icono = Toolkit.getDefaultToolkit().getImage("Icono/IconoBien.png");
+        setIconImage(icono);
         this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS));
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(20);
@@ -67,6 +70,7 @@ public class Consultar_Usuarios extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("JavaEvents");
 
         jButton1.setText("...");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

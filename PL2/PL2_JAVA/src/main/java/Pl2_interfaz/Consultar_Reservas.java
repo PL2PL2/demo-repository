@@ -7,6 +7,8 @@ package Pl2_interfaz;
 import java.awt.Color;
 import static java.awt.Component.CENTER_ALIGNMENT;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -31,6 +33,8 @@ public class Consultar_Reservas extends javax.swing.JFrame {
         ManejarDatos.cargarReservas();
         reservas = ManejarDatos.getReservas();
         initComponents();
+        Image icono = Toolkit.getDefaultToolkit().getImage("Icono/IconoBien.png");
+        setIconImage(icono);
         jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS)); // Cambio aquí
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(20);
         Cliente cliente = new Cliente("", "", "", "", "", "", false);
@@ -86,6 +90,7 @@ public class Consultar_Reservas extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("JavaEvents");
         setPreferredSize(new java.awt.Dimension(901, 550));
         setResizable(false);
 

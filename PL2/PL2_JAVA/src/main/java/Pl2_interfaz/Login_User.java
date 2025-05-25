@@ -4,11 +4,16 @@
  */
 package Pl2_interfaz;
 
+import java.awt.BorderLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.ListIterator;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import pl2_java.*;
 
 /*
@@ -39,6 +44,10 @@ public class Login_User extends javax.swing.JFrame {
     //private ListIterator<Cliente> li;
     public Login_User() {
         initComponents();
+        
+        Image icono = Toolkit.getDefaultToolkit().getImage("Icono/IconoBien.png");
+        setIconImage(icono);
+        
     }
 
     /**

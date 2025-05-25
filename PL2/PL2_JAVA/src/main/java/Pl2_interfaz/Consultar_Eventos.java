@@ -7,6 +7,8 @@ package Pl2_interfaz;
 import java.awt.Color;
 import static java.awt.Component.CENTER_ALIGNMENT;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -29,6 +31,8 @@ public class Consultar_Eventos extends javax.swing.JFrame {
     private Cliente cliente;
     public Consultar_Eventos() {
         initComponents();
+        Image icono = Toolkit.getDefaultToolkit().getImage("Icono/IconoBien.png");
+        setIconImage(icono);
         this.cliente = new Cliente("","","","","","",false);
         
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(20);
@@ -61,6 +65,7 @@ public class Consultar_Eventos extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("JavaEvents");
 
         jFormattedTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,6 +209,15 @@ public class Consultar_Eventos extends javax.swing.JFrame {
             })
             .forEach(ev -> {
                 Evento_Panel panel = new Evento_Panel(ev, cliente, this);
+                panel.getLabel2().setVisible(false);
+                panel.getLabel2().setEnabled(false);
+                panel.getSlider1().setVisible(false);
+                panel.getSlider1().setEnabled(false);
+                panel.getBoton2().setVisible(false);
+                panel.getBoton2().setEnabled(false);
+                panel.getBoton1().setVisible(false);
+                panel.getBoton1().setEnabled(false);
+                
                 panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 300));
                 panel.setAlignmentX(CENTER_ALIGNMENT);
                 panel.setBorder(BorderFactory.createCompoundBorder(

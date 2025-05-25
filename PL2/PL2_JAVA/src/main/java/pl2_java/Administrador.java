@@ -7,96 +7,70 @@ package pl2_java;
 import java.util.ArrayList;
 
 /**
- *
+ * Representa un administrador de la aplicación JavaEvents.
+ * 
+ * <p>
+ * El administrador es una clase adicional (el programa no lo aprovecha) diseñada para manejar múltiples administradores en la aplicación. 
+ * Los administradores pueden agregar y modificar eventos, asignar VIPS, así como consultar la información de clientes, eventos y reservas.
+ * </p>
+ * 
  * @author Alejandro
+ * @version 1.0
  */
 public class Administrador {
     private String correo;
     private String clave;
-    private ArrayList<Evento> eventos; // Todos los eventos.
-    private ArrayList<Cliente> clientes; // Todos los clientes.
-
+    /**
+    * Crea un nuevo administrador con el correo y la clave especificados.
+    * 
+    * @param correo Correo electrónico del administrador.
+    * @param clave Clave o contraseña del administrador.
+    */
     public Administrador(String correo, String clave) {
         this.correo = correo;
         this.clave = clave;
-        this.eventos = new ArrayList<>();
-        this.clientes = new ArrayList<>();
     }
-
+    /**
+    * Obtiene el correo electrónico del administrador.
+    * 
+    * @return el correo electrónico.
+    */
     public String getCorreo() {
         return correo;
     }
-
+    /**
+    * Establece el correo electrónico del administrador.
+    * 
+    * @param correo nuevo correo electrónico.
+    */
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-
+    /**
+    * Obtiene la clave o contraseña del administrador.
+    * 
+    * @return la clave.
+    */
     public String getClave() {
         return clave;
     }
-
+    /**
+    * Establece la clave o contraseña del administrador.
+    * 
+    * @param clave nueva clave o contraseña.
+    */
     public void setClave(String clave) {
         this.clave = clave;
     }
 
-    public ArrayList<Evento> getEventos() {
-        return eventos;
-    }
-
-    public void setEventos(ArrayList<Evento> eventos) {
-        if (eventos != null) {
-            this.eventos = eventos;
-        }
-    }
-
-    public void agregarEvento(Evento evento) {
-        if (evento != null) {
-            eventos.add(evento);
-        }
-    }
-
-    public ArrayList<Cliente> getClientes() {
-        return clientes;
-    }
-
-    public void setClientes(ArrayList<Cliente> clientes) {
-        if (clientes != null) {
-            this.clientes = clientes;
-        }
-    }
-
-    public boolean agregarCliente(Cliente cliente) {
-        if (cliente != null) {
-            for(Cliente c : clientes){
-                if (c.getCorreo_electronico().equals(cliente.getCorreo_electronico())){
-                    return false;
-                }
-            }
-            clientes.add(cliente);
-            return true;
-        }
-        return false;
-    }
     
-    public boolean modificarEventoPorTitulo(String titulo, String nuevoTitulo, String nuevoTipo, String nuevaDireccion,String[] nuevasFechas, double nuevoPrecio, String nuevaPortada) {
-    for (Evento e : eventos) {
-        if (e.getTitulo().equals(titulo)) {
-            e.setTitulo(nuevoTitulo);
-            e.setTipo(nuevoTipo);
-            e.setDireccion(nuevaDireccion);
-            //e.setFechas(nuevasFechas);
-            e.setPrecio(nuevoPrecio);
-            e.setPortada(nuevaPortada);
-            return true; 
-        }
-    }
-    return false;
-
-    
-}
-
+    /**
+    * Devuelve una representación en forma de texto del administrador, incluyendo su correo y clave.
+    * 
+    * @return texto con la información del administrador.
+    */
     @Override
     public String toString() {
-        return "Administrador{" + "correo=" + correo + ", clave=" + clave + ", eventos=" + eventos + ", clientes=" + clientes + '}';
+        return "Administrador{" + "correo=" + correo + ", clave=" + clave + '}' ;
     }
 }

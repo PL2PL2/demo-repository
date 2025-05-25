@@ -11,6 +11,8 @@ import java.io.ObjectInputStream;
 import java.io.EOFException;
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Random;
@@ -28,6 +30,8 @@ public class Introducir_Correo extends javax.swing.JFrame {
     private ArrayList<Cliente> clientes;
     public Introducir_Correo() {
         initComponents();
+        Image icono = Toolkit.getDefaultToolkit().getImage("Icono/IconoBien.png");
+        setIconImage(icono);
         ManejarDatos.cargarClientes();
         clientes = ManejarDatos.getClientes();
     }
@@ -51,6 +55,7 @@ public class Introducir_Correo extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("JavaEvents");
 
         jLabel1.setText("INTRODUCIR CORREO");
 

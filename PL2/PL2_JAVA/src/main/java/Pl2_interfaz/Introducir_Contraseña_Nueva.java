@@ -4,6 +4,8 @@
  */
 package Pl2_interfaz;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,6 +31,8 @@ public class Introducir_Contraseña_Nueva extends javax.swing.JFrame {
         this.cliente = c;
         this.index = index;
         initComponents();
+        Image icono = Toolkit.getDefaultToolkit().getImage("Icono/IconoBien.png");
+        setIconImage(icono);
     }
 
 
@@ -48,6 +52,7 @@ public class Introducir_Contraseña_Nueva extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("JavaEvents");
 
         jFormattedTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

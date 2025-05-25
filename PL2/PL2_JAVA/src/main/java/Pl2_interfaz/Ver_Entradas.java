@@ -7,6 +7,8 @@ package Pl2_interfaz;
 import java.awt.Color;
 import static java.awt.Component.CENTER_ALIGNMENT;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -34,6 +36,8 @@ public class Ver_Entradas extends javax.swing.JFrame {
         ManejarDatos.cargarReservas();
         reservas = ManejarDatos.getReservas();
         initComponents();
+        Image icono = Toolkit.getDefaultToolkit().getImage("Icono/IconoBien.png");
+        setIconImage(icono);
         jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS)); // Cambio aquí
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(20);
         //setExtendedState(this.MAXIMIZED_BOTH);
@@ -94,6 +98,7 @@ public class Ver_Entradas extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("JavaEvents");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

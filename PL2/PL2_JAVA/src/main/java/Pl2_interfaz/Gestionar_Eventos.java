@@ -4,6 +4,8 @@
  */
 package Pl2_interfaz;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,6 +26,8 @@ public class Gestionar_Eventos extends javax.swing.JFrame {
      */
     public Gestionar_Eventos() {
         initComponents();
+        Image icono = Toolkit.getDefaultToolkit().getImage("Icono/IconoBien.png");
+        setIconImage(icono);
     }
 
     /**
@@ -41,6 +45,7 @@ public class Gestionar_Eventos extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("JavaEvents");
 
         jLabel1.setText("GESTION DE EVENTOS");
 

@@ -4,6 +4,8 @@
  */
 package Pl2_interfaz;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
@@ -26,6 +28,8 @@ public class Editar_Evento extends javax.swing.JFrame {
     private ArrayList<String> fechasActual;
     public Editar_Evento(Evento evento) {
         initComponents();
+        Image icono = Toolkit.getDefaultToolkit().getImage("Icono/IconoBien.png");
+        setIconImage(icono);
         this.eveSel = evento;
         this.Portada = evento.getPortada();
         this.fechasActual=eveSel.getFechas();
@@ -76,6 +80,7 @@ public class Editar_Evento extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("JavaEvents");
 
         jButton1.setText("GUARDAR CAMBIOS");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
