@@ -1,0 +1,98 @@
+@startuml
+
+interface Serializable
+
+class Cliente {
+    - nombre: String
+    - correo_electronico: String
+    - clave: String
+    - teléfono: String
+    - dirección: String
+    - tarjeta_de_credito: String
+    - VIP: boolean
+    - eventos: ArrayList<Evento>
+    - reservas: ArrayList<Reserva>
+
+    + Cliente(nombre: String, correo_electronico: String, clave: String, teléfono: String, dirección: String, tarjeta_de_credito: String, VIP: boolean)
+    + getNombre(): String
+    + getCorreo_electronico(): String
+    + getClave(): String
+    + getTeléfono(): String
+    + getDirección(): String
+    + getTarjeta_de_credito(): String
+    + isVIP(): boolean
+    + getVip(): String
+    + setVip(vip: boolean): void
+    + setReservas(res: ArrayList<Reserva>): void
+    + getEventos(): ArrayList<Evento>
+    + addReserva(reserva: Reserva): void
+    + getReservas(): ArrayList<Reserva>
+    + toString(): String
+}
+
+class Evento {
+    - titulo: String
+    - tipo: String
+    - direccion: String
+    - fechas: ArrayList<String>
+    - precio: Double
+    - portada: String
+    - calificaciones: ArrayList<Double>
+    - imagen: ImageIcon
+
+    + Evento(titulo: String, tipo: String, direccion: String, fechas: ArrayList<String>, precio: Double, portada: String, calificaciones: ArrayList<Double>)
+    + getTitulo(): String
+    + setTitulo(titulo: String): void
+    + getTipo(): String
+    + setTipo(tipo: String): void
+    + getDireccion(): String
+    + setDireccion(direccion: String): void
+    + getFechas(): ArrayList<String>
+    + setFechas(fechas: ArrayList<String>): void
+    + getPrecio(): Double
+    + setPrecio(precio: Double): void
+    + getPortada(): String
+    + setPortada(portada: String): void
+    + getImagen(): ImageIcon
+    + agregarReseña(c: double): void
+    + getCalificacionMedia(): double
+    + toString(): String
+}
+
+class Reserva {
+    - cliente: Cliente
+    - evento: Evento
+    - fecha: String
+    - notaIndividual: Double
+
+    + Reserva(cl: Cliente, ev: Evento, fecha: String)
+    + getCliente(): Cliente
+    + setCliente(cliente: Cliente): void
+    + getEvento(): Evento
+    + setEvento(evento: Evento): void
+    + getFecha(): String
+    + setFecha(fecha: String): void
+    + getNotaIndividual(): Double
+    + setNotaIndividual(notaIndividual: Double): void
+    + toString(): String
+}
+class Administrador {
+    - correo: String
+    - clave: String
+
+    + Administrador(correo: String, clave: String)
+    + getCorreo(): String
+    + setCorreo(correo: String): void
+    + getClave(): String
+    + setClave(clave: String): void
+    + toString(): String
+}
+
+Cliente ..|> Serializable
+Evento ..|> Serializable
+Reserva ..|> Serializable
+
+Reserva --> Cliente : cliente
+Reserva --> Evento : evento
+
+@enduml
