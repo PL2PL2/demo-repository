@@ -46,6 +46,7 @@ public class Gestionar_Eventos extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JavaEvents");
+        setResizable(false);
 
         jLabel1.setText("GESTION DE EVENTOS");
 

@@ -81,6 +81,7 @@ public class Editar_Evento extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JavaEvents");
+        setResizable(false);
 
         jButton1.setText("GUARDAR CAMBIOS");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

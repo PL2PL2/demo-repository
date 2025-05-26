@@ -40,19 +40,23 @@ public class Ver_Eventos extends javax.swing.JFrame {
         setIconImage(icono);
         this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         ManejarDatos.cargarEventos();
-    ArrayList<Evento> eventos = ManejarDatos.getEventos();
+        ArrayList<Evento> eventos = ManejarDatos.getEventos();
 
     
 
     if (eventos == null || eventos.isEmpty()) {
         panelEventos.add(new javax.swing.JLabel("No hay eventos disponibles."));
     } else {
+        int cont = 0; // Cantidad de resultados
         for (Evento e : eventos) {
     // Panel contenedor para el evento:
     AdminEvento_Panel panelEvento = new AdminEvento_Panel(e,this);
    panelEventos.add(panelEvento);
    panelEventos.add(Box.createRigidArea(new Dimension(0, 20)));
+   cont++;
         }
+        jLabel3.setText("Resultados obtenidos: ");
+        jLabel2.setText(String.valueOf(cont));
       }
     }
        
@@ -71,6 +75,8 @@ public class Ver_Eventos extends javax.swing.JFrame {
         scrollEventos = new javax.swing.JScrollPane();
         panelEventos = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JavaEvents");
@@ -90,21 +96,35 @@ public class Ver_Eventos extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("jLabel2");
+
+        jLabel3.setText("jLabel3");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(100, 100, 100)
                 .addComponent(scrollEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(scrollEventos, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jButton1)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -165,6 +185,8 @@ public class Ver_Eventos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel panelEventos;
     private javax.swing.JScrollPane scrollEventos;
     // End of variables declaration//GEN-END:variables

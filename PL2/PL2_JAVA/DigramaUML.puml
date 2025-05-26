@@ -120,7 +120,7 @@ Cliente ..|> Serializable
 Evento ..|> Serializable
 Reserva ..|> Serializable
 
-Reserva --> Cliente : cliente
-Reserva --> Evento : evento
+Reserva "0..*" --> "1" Cliente : cliente
+Reserva "0..*" --> "1" Evento : evento
 
 @enduml

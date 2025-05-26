@@ -44,6 +44,7 @@ public class Login_Administrador extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JavaEvents");
+        setResizable(false);
 
         jLabel1.setText("Acceso como administrador:");
 

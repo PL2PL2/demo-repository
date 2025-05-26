@@ -69,6 +69,7 @@ private ArrayList<Double> calificaciones;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JavaEvents");
+        setResizable(false);
 
         jLabel1.setText("AÑADIR EVENTO");
 

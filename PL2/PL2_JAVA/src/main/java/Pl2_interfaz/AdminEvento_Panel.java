@@ -62,7 +62,7 @@ public class AdminEvento_Panel extends javax.swing.JPanel {
                                "\nTipo: " + evento.getTipo() +
                                "\nDirección: " + evento.getDireccion() +
                                "\nFechas: " + evento.getFechas() +
-                               "\nPrecio: " + evento.getPrecio() +
+                               "\nPrecio: " + evento.getPrecio() + "€" +
                                "\nCalificación: " + evento.getCalificacionMedia());
         
         ImageIcon img= evento.getImagen();          //Cargamos la imagen

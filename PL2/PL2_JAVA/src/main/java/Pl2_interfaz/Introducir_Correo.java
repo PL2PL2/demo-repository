@@ -56,6 +56,7 @@ public class Introducir_Correo extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JavaEvents");
+        setResizable(false);
 
         jLabel1.setText("INTRODUCIR CORREO");
 

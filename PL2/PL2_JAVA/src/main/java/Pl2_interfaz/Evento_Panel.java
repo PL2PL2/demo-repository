@@ -4,10 +4,12 @@
  */
 package Pl2_interfaz;
 
+import Pl2_interfaz.Ver_Entradas;
 import java.awt.Dimension;
 import java.time.LocalDate;
 import javax.swing.ImageIcon;
 import java.awt.Image;
+import java.awt.Window;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -25,6 +27,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import javax.swing.SwingUtilities;
 
 
 
@@ -63,17 +66,6 @@ public class Evento_Panel extends javax.swing.JPanel {
         this.setPreferredSize(new Dimension(600, 400));
         this.setMaximumSize(new Dimension(Integer.MAX_VALUE, 120)); // evita que crezca verticalmente
         initComponents();
-//        this.cont = 0;
-//        for(Reserva r : reservas){
-//            if(r.getCliente().getCorreo_electronico().equals(cliente.getCorreo_electronico()) && r.getEvento().getTitulo().equals(evento.getTitulo()) && ev.getFechas().contains( r.getFecha() )){
-//                jButton1.setText("RESERVADO");
-//                jButton1.setEnabled(false);
-//                jComboBox1.removeAllItems();
-//                jComboBox1.addItem(r.getFecha());
-//                jComboBox1.setEnabled(false);
-//                break;
-//                }
-//            }
         
         jLabel1.setPreferredSize(new Dimension(200, 200)); // tamaño fijo: ancho = 200px, alto = 150px
         jLabel1.setText("");
@@ -224,7 +216,7 @@ public class Evento_Panel extends javax.swing.JPanel {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int confirm = JOptionPane.showConfirmDialog(this, "¿Confirmas la compra de la entrada?" + "\nTitulo: " +  evento.getTitulo() + "\nFecha " + jComboBox1.getSelectedItem().toString() + "\nCoste " + PrecioReal,
+        int confirm = JOptionPane.showConfirmDialog(this, "¿Confirmas la compra de la entrada?" + "\nTitulo: " +  evento.getTitulo() + "\nFecha " + jComboBox1.getSelectedItem().toString() + "\nCoste " + PrecioReal + "€",
                                                 "Confirmar compra", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
         
@@ -260,7 +252,7 @@ public class Evento_Panel extends javax.swing.JPanel {
             int segundo = fechaHora.getSecond();
 
             
-            String contenido = "Fecha: " + fechaFactura.toString() + " " + hora + ":" + minuto + ":" + segundo + "\nImporte: " + String.valueOf(PrecioReal)
+            String contenido = "Fecha: " + fechaFactura.toString() + " " + hora + ":" + minuto + ":" + segundo + "\nImporte: " + String.valueOf(PrecioReal) + "€" 
                     + "\nEvento: " + evento + "\nCliente: " + cliente;
 
             try (BufferedWriter escritor = new BufferedWriter(new FileWriter(nombreArchivo, true))) {
@@ -321,8 +313,16 @@ public class Evento_Panel extends javax.swing.JPanel {
             }
             l++;
         }
+        
             }
         }
+        Window window = SwingUtilities.getWindowAncestor(this); 
+    if (window instanceof JFrame) {
+        window.dispose(); // Cerrar el Jframe que lo contiene
+    }
+        Ver_Entradas ver = new Ver_Entradas(cliente);
+            ver.setVisible(true); //Recargar vista
+    
     }//GEN-LAST:event_jButton2ActionPerformed
         
     public JButton getBoton1() {
