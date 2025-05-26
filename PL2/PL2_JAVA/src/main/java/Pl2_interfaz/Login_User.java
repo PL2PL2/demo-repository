@@ -190,7 +190,7 @@ public class Login_User extends javax.swing.JFrame {
         ManejarDatos.cargarClientes();
         clientes = ManejarDatos.getClientes();
         //li = clientes.listIterator();
-        Cliente clientillo = null;
+        Cliente clientillo = new Cliente("", "", "", "", "", "", false);
         Login_User si = new Login_User();
         HashMap<String, String> users = new HashMap<>();
         users.put("pepe@gmail.com", "1234");

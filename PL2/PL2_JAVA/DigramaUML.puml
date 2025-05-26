@@ -88,6 +88,34 @@ class Administrador {
     + toString(): String
 }
 
+class ManejarDatos {
+    - eventos: ArrayList<Evento>
+    - objeve: Evento
+    - clientes: ArrayList<Cliente>
+    - objcli: Cliente
+    - reservas: ArrayList<Reserva>
+    - objres: Reserva
+
+    + setClientes(c: ArrayList<Cliente>): void
+    + getClientes(): ArrayList<Cliente>
+    + cargarClientes(): void
+    + guardarClientes(): void
+
+    + setEventos(e: ArrayList<Evento>): void
+    + getEventos(): ArrayList<Evento>
+    + cargarEventos(): void
+    + guardarEventos(): void
+
+    + setReservas(r: ArrayList<Reserva>): void
+    + getReservas(): ArrayList<Reserva>
+    + cargarReservas(): void
+    + guardarReservas(): void
+}
+
+ManejarDatos --> Cliente
+ManejarDatos --> Evento
+ManejarDatos --> Reserva
+
 Cliente ..|> Serializable
 Evento ..|> Serializable
 Reserva ..|> Serializable
