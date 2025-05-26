@@ -53,6 +53,16 @@ public class Ver_Entradas extends javax.swing.JFrame {
             }
                 
                 Evento_Panel panel = new Evento_Panel(ev, cliente, this);
+                if(r.getNotaIndividual()!=null){
+                    panel.getBoton2().setVisible(false);
+                    panel.getBoton2().setEnabled(false);
+                    panel.getSlider1().setVisible(false);
+                    panel.getSlider1().setEnabled(false);
+                    panel.getLabel2().setVisible(false);
+                    panel.getLabel2().setEnabled(false);
+                    
+                }
+                   
                 panel.getComboBox().setVisible(false); // Oculta comboBox
                 panel.getComboBox().setEnabled(false); // Desactiva comboBox
                 panel.getBoton1().setVisible(false); // Oculta jButton1
@@ -70,7 +80,7 @@ public class Ver_Entradas extends javax.swing.JFrame {
                                "\nTipo: " + ev.getTipo() +
                                "\nDirección: " + ev.getDireccion() +
                                "\nFecha elegida: " + r.getFecha() +
-                               "\nPrecio: " + PrecioReal+
+                               "\nPrecio: " + PrecioReal+ "€" +
                                "\nCalificación: " + ev.getCalificacionMedia();
                                 
                 panel.setTexto(texto);

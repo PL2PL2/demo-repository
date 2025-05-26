@@ -181,8 +181,9 @@ public class Evento_Panel extends javax.swing.JPanel {
                             .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(jLabel2)))))
-                .addContainerGap(67, Short.MAX_VALUE))
+                                .addComponent(jLabel2)))
+                        .addGap(0, 100, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -337,6 +338,7 @@ public class Evento_Panel extends javax.swing.JPanel {
     public JButton getBoton2(){
         return this.jButton2;
     }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
