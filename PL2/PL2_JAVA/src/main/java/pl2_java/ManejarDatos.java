@@ -15,12 +15,12 @@ import java.util.*;
  * así como para acceder y hacer una ordenacion básica de listas de objetos.</p>
  * 
  * <p>Los ficheros utilizados son:
+ * </p>
  * <ul>
  *   <li><code>registroClientes.dat</code></li>
  *   <li><code>registroEventos.dat</code></li>
  *   <li><code>registroReservas.dat</code></li>
  * </ul>
- * </p>
  * 
  * @author Alejandro
  * @version 1.0
