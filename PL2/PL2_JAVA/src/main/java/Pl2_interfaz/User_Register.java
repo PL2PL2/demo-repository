@@ -15,6 +15,7 @@ import pl2_java.*;
  *
  * @author daniel
  */
+// Registro del usuario
 public class User_Register extends javax.swing.JFrame {
     private ArrayList<Cliente> clientes;
     /**
@@ -204,7 +205,7 @@ public class User_Register extends javax.swing.JFrame {
         if (jCheckBox1.isSelected()) {
             jPasswordField1.setEchoChar((char) 0); // Muestra la contraseña
         } else {
-            jPasswordField1.setEchoChar('*'); // Vuelve a ocultarla con un punto negro (•)
+            jPasswordField1.setEchoChar('*'); // Vuelve a ocultarla con un punto negro (*)
         }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
@@ -213,7 +214,7 @@ public class User_Register extends javax.swing.JFrame {
         if (jCheckBox2.isSelected()) {
             jPasswordField2.setEchoChar((char) 0); // Muestra la contraseña
         } else {
-            jPasswordField2.setEchoChar('*'); // Vuelve a ocultarla con un punto negro (•)
+            jPasswordField2.setEchoChar('*'); // Vuelve a ocultarla con un punto negro (*)
         }
     }//GEN-LAST:event_jCheckBox2ActionPerformed
 
@@ -232,10 +233,12 @@ public class User_Register extends javax.swing.JFrame {
         String key = new String(jPasswordField1.getPassword());
         String creditCard = new String(jPasswordField2.getPassword());
         boolean VIP = false;
+        // Comprobamos que se hayan rellenado todos los campos del registro
         boolean camposCompletos = (!name.isEmpty() && !eMail.isEmpty() && !direction.isEmpty() &&
                                !phoneNumber.isEmpty() && !key.isEmpty() && !creditCard.isEmpty());
         boolean existe = false;
-    
+        
+        // Creamos al nuevo cliente, comprobando mas adelante si no esta ya en el .dat
         Cliente nuevoCliente = new Cliente(name, eMail, key, phoneNumber, direction, creditCard, VIP);
 
         if (camposCompletos) {
@@ -280,7 +283,7 @@ public class User_Register extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No has sido registrado correctamente. Rellene todas las casillas por favor", "Registro No Exitoso", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         Login_User log=new Login_User();

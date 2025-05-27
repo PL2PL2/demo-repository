@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
  *
  * @author Alejandro
  */
+// Login del administrador con admin@javaevents.com y clave admin
 public class Login_Administrador extends javax.swing.JFrame {
 
     /**
@@ -140,6 +141,7 @@ public class Login_Administrador extends javax.swing.JFrame {
         String admin = jFormattedTextField1.getText();
         String password = new String(jPasswordField1.getPassword());
         
+        // Comprobamos que sean validas las credenciales
         if(admin.equals("admin@javaevents.com") && password.equals("admin")){
             JOptionPane.showMessageDialog(this, "Credenciales válidas", password, JOptionPane.INFORMATION_MESSAGE);
             inicio.setVisible(true);
@@ -148,7 +150,7 @@ public class Login_Administrador extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Tú no eres el Admin", password, JOptionPane.ERROR_MESSAGE);
         } 
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         Login_User nuevaVentana = new Login_User();
@@ -163,7 +165,7 @@ public class Login_Administrador extends javax.swing.JFrame {
         if (jCheckBox1.isSelected()) {
             jPasswordField1.setEchoChar((char) 0); // Muestra la contraseña
         } else {
-            jPasswordField1.setEchoChar('*'); // Vuelve a ocultarla con un punto negro (•)
+            jPasswordField1.setEchoChar('*'); // Vuelve a ocultarla con un punto negro (*)
         }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 

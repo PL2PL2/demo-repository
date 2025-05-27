@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
  *
  * @author daniel
  */
+// Dialogo que sirve como  pantalla de carga(solo visual)
 public class cargando extends javax.swing.JDialog {
 
     /** Creates new form NewJDialog */

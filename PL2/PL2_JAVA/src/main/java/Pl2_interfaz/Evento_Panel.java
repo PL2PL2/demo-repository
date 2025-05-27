@@ -35,6 +35,7 @@ import javax.swing.SwingUtilities;
  *
  * @author daniel
  */
+// Utilizada para mostrar eventos, reservas...
 public class Evento_Panel extends javax.swing.JPanel {
 
     /**

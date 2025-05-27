@@ -17,6 +17,7 @@ import pl2_java.ManejarDatos;
  *
  * @author daniel
  */
+// El admin puede añadir un evento
 public class Añadir_Evento extends javax.swing.JFrame {
 private String rutaPortada;
 private ArrayList<Evento> eventos;

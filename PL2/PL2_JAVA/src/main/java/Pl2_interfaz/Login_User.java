@@ -35,6 +35,7 @@ import pl2_java.*;
  *
  * @author Alejandro
  */
+// Login de user
 public class Login_User extends javax.swing.JFrame {
     
     /**
@@ -188,10 +189,10 @@ public class Login_User extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        ManejarDatos.cargarClientes();
+        ManejarDatos.cargarClientes(); // Cogemos los datos del .dat
         clientes = ManejarDatos.getClientes();
         //li = clientes.listIterator();
-        Cliente clientillo = new Cliente("", "", "", "", "", "", false);
+        Cliente clientillo = new Cliente("", "", "", "", "", "", false); // Creamos un cliente vacio
         Login_User si = new Login_User();
         HashMap<String, String> users = new HashMap<>();
         users.put("pepe@gmail.com", "1234");
@@ -204,14 +205,14 @@ public class Login_User extends javax.swing.JFrame {
         if(user.matches(".+@.+\\..+")){
           try{
             for(Cliente c:clientes){
-                       
+                    // Comprobamos si existe
                     if (c.getCorreo_electronico().equals(user)) {
                             
                             existe = true;
                             if(c.getClave().equals(password)){
                                 contraseña = true;
                             }
-                            clientillo = c;
+                            clientillo = c; // Asignamos clientillo al cliente que coincida con su correo, si lo hay
                             break;
                         
                     }
@@ -230,10 +231,10 @@ public class Login_User extends javax.swing.JFrame {
                 }
             }
 
-            clientillo.setReservas(misReservas);
+            clientillo.setReservas(misReservas); // Asignamos sus reservas al cliente para que se guarden
             if(existe && contraseña){
-                cargando msg = new cargando("Cargando...", "Esperando al servidor", 1000);
-                Inicio_Usuario inicio = new Inicio_Usuario(clientillo);
+                cargando msg = new cargando("Cargando...", "Esperando al servidor", 1000); // Pantalla de carga(decorativa)
+                Inicio_Usuario inicio = new Inicio_Usuario(clientillo); // Le pasasmos el cliente al inicio, para poder usarlo
                 inicio.setVisible(true);
                 this.dispose();
             }else if(existe && !contraseña){

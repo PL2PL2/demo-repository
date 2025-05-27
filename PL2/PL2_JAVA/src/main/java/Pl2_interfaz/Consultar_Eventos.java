@@ -22,6 +22,7 @@ import pl2_java.ManejarDatos;
  *
  * @author Alejandro
  */
+// El admin consulta los eventos creados
 public class Consultar_Eventos extends javax.swing.JFrame {
 
     private ArrayList<Evento> eventos;

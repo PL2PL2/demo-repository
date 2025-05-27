@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
  *
  * @author Alejandro
  */
+// Ver datos del cliente, y poder editarlos
 public class Perfil_Usuario extends javax.swing.JFrame {
 
     /**
@@ -219,11 +220,10 @@ public class Perfil_Usuario extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel12))))
+                                .addComponent(jLabel6)
+                                .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel12))
+                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(60, 60, 60)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4)
@@ -290,6 +290,7 @@ public class Perfil_Usuario extends javax.swing.JFrame {
                 break;
             index += 1;
         }
+        // La edicion se hace en la misma ventana, cambiando el nombre del boton y su funcion
         if(buttonText.equals("EDITAR")){
             jButton4.setText("GUARDAR");
             jFormattedTextField1.setEditable(true);
@@ -312,7 +313,7 @@ public class Perfil_Usuario extends javax.swing.JFrame {
                 vip = false;
             }
             String telefono = jFormattedTextField5.getText();
-            Cliente cambiado = new Cliente(nombre, correo, cliente.getClave(), telefono, direccion, tarjeta, vip);
+            Cliente cambiado = new Cliente(nombre, correo, cliente.getClave(), telefono, direccion, tarjeta, vip); // Nuevo cliente con los datos nuevos
             int confirm = JOptionPane.showConfirmDialog(this, "¿Confirmas el cambio de los datos?" + "\nNombre: " +  cambiado.getNombre() + "\nCorreo " + cambiado.getCorreo_electronico() + 
                     "\ndireccion " + cambiado.getDirección() + "\ntelefono: " + cambiado.getTeléfono(),
                                                 "Confirmar compra", JOptionPane.YES_NO_OPTION);

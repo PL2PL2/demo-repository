@@ -12,6 +12,7 @@ import pl2_java.ManejarDatos;
  *
  * @author Alejandro
  */
+// Clase para mostrar los clientes al admin
 public class panelClientes extends javax.swing.JPanel {
     private Cliente cliente;
     private  ArrayList<Cliente> clientes;

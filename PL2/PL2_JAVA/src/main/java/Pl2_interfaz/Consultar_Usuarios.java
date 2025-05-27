@@ -28,6 +28,7 @@ import pl2_java.ManejarDatos;
  *
  * @author Alejandro
  */
+// Le muestra los usuarios al admin
 public class Consultar_Usuarios extends javax.swing.JFrame {
 
     /**

@@ -22,6 +22,7 @@ import pl2_java.Cliente;
  *
  * @author danie
  */
+// El admin consulta las reservas de los clientes
 public class Consultar_Reservas extends javax.swing.JFrame {
 
     /**

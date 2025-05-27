@@ -22,6 +22,7 @@ import pl2_java.Reserva;
  *
  * @author Alejandro
  */
+// Panel del admin(Utilizado para poner eventos, reservas...)
 public class AdminEvento_Panel extends javax.swing.JPanel {
 
     /**
