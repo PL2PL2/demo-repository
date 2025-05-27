@@ -28,6 +28,7 @@ public class Consultar_Reservas extends javax.swing.JFrame {
      * Creates new form Consultar_Reservas
      */
     private Evento ev;
+    private Cliente cl;
     private ArrayList<Reserva> reservas;
     public Consultar_Reservas() {
         ManejarDatos.cargarReservas();
@@ -35,11 +36,13 @@ public class Consultar_Reservas extends javax.swing.JFrame {
         initComponents();
         Image icono = Toolkit.getDefaultToolkit().getImage("Icono/IconoBien.png");
         setIconImage(icono);
+        this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.Y_AXIS)); // Cambio aquí
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(20);
         Cliente cliente = new Cliente("", "", "", "", "", "", false);
         for (Reserva r : reservas) {
             ev = r.getEvento();
+            cl = r.getCliente();
             Evento_Panel panel = new Evento_Panel(ev, cliente, this);
             panel.getComboBox().setVisible(false); // Oculta comboBox
             panel.getComboBox().setEnabled(false); // Desactiva comboBox
@@ -64,7 +67,12 @@ public class Consultar_Reservas extends javax.swing.JFrame {
                            "\nDirección: " + ev.getDireccion() +
                            "\nFecha elegida: " + r.getFecha() +
                            "\nPrecio: " + ev.getPrecio()+
-                           "\nCalificación: " + ev.getCalificacionMedia();
+                           "\nCalificación: " + r.getNotaIndividual() +
+                            "\nCliente: " + cl.getNombre() +                                          
+                            "\nCorreo: "  + cl.getCorreo_electronico() +             
+                            "\nVIP: " + cl.getVip();
+                                    
+                                
 
             panel.setTexto(texto);
             panel.setImagenEvento(ev.getImagen());
@@ -92,7 +100,6 @@ public class Consultar_Reservas extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JavaEvents");
         setPreferredSize(new java.awt.Dimension(901, 550));
-        setResizable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -119,13 +126,13 @@ public class Consultar_Reservas extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
