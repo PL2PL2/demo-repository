@@ -289,6 +289,7 @@ public class Editar_Evento extends javax.swing.JFrame {
         catch(Exception e){
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Escribe un valor adecuado.", "Registro No Exitoso", JOptionPane.ERROR_MESSAGE);
+            camposCompletos=false;
         }
         if(camposCompletos==true){
             try{

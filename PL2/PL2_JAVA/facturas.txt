@@ -6,3 +6,27 @@ Fecha: 2025-05-27 0:42:44
 Importe: 60.0€
 Evento: Evento{titulo=Festival Galáctico de Sonidos Urbanos, tipo=Concierto, direccion=Bilbao, Calle Alameda de Urquijo, 56, 48011, fechas=[10/09/26-19:00, 11/09/26-19:00], precio=60.0, portada=Festival Galáctico de Sonidos Urbanos.jpg, calificacion=0.0}
 Cliente: Cliente{nombre=Ismael, correo_electronico=ismael@gmail.com, clave=ismael, teléfono=861-24-35-43, dirección=Guadalajara, C. de María Pacheco, 22, 19225, tarjeta_de_credito=Ismael Espadas, 1234567890345678, 11/30, VIP=false, eventos=[]}
+Fecha: 2025-05-27 19:12:55
+Importe: 38.0€
+Evento: Evento{titulo=Concierto de Nébula Prisma, tipo=Concierto, direccion=Madrid, Paseo del Prado, 12, 28014, fechas=[14/06/25-21:00, 24/07/25-21:00], precio=38.0, portada=Concierto de Nébula Prisma.jpg, calificacion=0.0}
+Cliente: Cliente{nombre=María, correo_electronico=maria@gmail.com, clave=maria, teléfono=897-63-45-54, dirección=Lugo, Manzanares, 31, 94220, tarjeta_de_credito=María Jiménez, 1234567890234567, 02/33, VIP=false, eventos=[]}
+Fecha: 2025-05-27 19:12:59
+Importe: 15.0€
+Evento: Evento{titulo=Musical Infantil: “Las Aventuras de Doxi y la Luna”, tipo=Musical, direccion=Zaragoza, Calle del Coso, 57, 50001  , fechas=[06/06/25-16:30, 07/06/25-16:30], precio=15.0, portada=Musical Infantil Las Aventuras de Doxi y la Luna.jpg, calificacion=0.0}
+Cliente: Cliente{nombre=María, correo_electronico=maria@gmail.com, clave=maria, teléfono=897-63-45-54, dirección=Lugo, Manzanares, 31, 94220, tarjeta_de_credito=María Jiménez, 1234567890234567, 02/33, VIP=false, eventos=[]}
+Fecha: 2025-05-27 19:13:2
+Importe: 35.0€
+Evento: Evento{titulo=Musical “Cantores del Horizonte”, tipo=Musical, direccion=Barcelona, Rambla de Catalunya, 33, 08007, fechas=[05/08/26-20:00, 06/08/26-20:00, 07/08/26-20:00], precio=35.0, portada=Musical “Cantores del Horizonte”.jpg, calificacion=0.0}
+Cliente: Cliente{nombre=María, correo_electronico=maria@gmail.com, clave=maria, teléfono=897-63-45-54, dirección=Lugo, Manzanares, 31, 94220, tarjeta_de_credito=María Jiménez, 1234567890234567, 02/33, VIP=false, eventos=[]}
+Fecha: 2025-05-27 19:14:11
+Importe: 30.0€
+Evento: Evento{titulo=Torneo Estelar de Béisbol, tipo=Deporte, direccion=Valencia, Avenida de Aragón, 30, 46021, fechas=[12/06/26-18:00, 19/06/26-18:00], precio=30.0, portada=Torneo Estelar de Béisbol.jpg, calificacion=4.0}
+Cliente: Cliente{nombre=Pedro, correo_electronico=pedro@gmail.com, clave=pedro, teléfono=075-97-05-38, dirección=Benidorm, Castañares, 24, 49132, tarjeta_de_credito=Pedro Valles, 0987654321123456, 08/32, VIP=false, eventos=[]}
+Fecha: 2025-05-27 19:14:13
+Importe: 30.0€
+Evento: Evento{titulo=Teatro Experimental: “Fragmentos del Tiempo”, tipo=Teatro, direccion=A Coruña, Rúa Francisco Mariño, 5, 15004, fechas=[25/10/25-17:00, 26/10/25-17:00], precio=30.0, portada=Teatro Experimental Fragmentos del Tiempo.jpg, calificacion=0.0}
+Cliente: Cliente{nombre=Pedro, correo_electronico=pedro@gmail.com, clave=pedro, teléfono=075-97-05-38, dirección=Benidorm, Castañares, 24, 49132, tarjeta_de_credito=Pedro Valles, 0987654321123456, 08/32, VIP=false, eventos=[]}
+Fecha: 2025-05-27 19:14:18
+Importe: 60.0€
+Evento: Evento{titulo=Festival Galáctico de Sonidos Urbanos, tipo=Concierto, direccion=Bilbao, Calle Alameda de Urquijo, 56, 48011, fechas=[10/09/26-19:00, 11/09/26-19:00], precio=60.0, portada=Festival Galáctico de Sonidos Urbanos.jpg, calificacion=3.0}
+Cliente: Cliente{nombre=Pedro, correo_electronico=pedro@gmail.com, clave=pedro, teléfono=075-97-05-38, dirección=Benidorm, Castañares, 24, 49132, tarjeta_de_credito=Pedro Valles, 0987654321123456, 08/32, VIP=false, eventos=[]}
